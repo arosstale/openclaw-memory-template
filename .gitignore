@@ -1,0 +1,98 @@
+# OpenClaw V2.1 Elite - Git Ignore
+# Sensitive and generated files
+
+# Environment variables
+.env
+.env.local
+.env.production
+
+# Secrets and keys
+*secret*
+*key*
+*token*
+*.pem
+*.key
+secrets/
+
+# Database
+*.db
+*.db-shm
+*.db-wal
+postgres_data/
+pgadmin_data/
+qdrant_data/
+
+# Logs
+*.log
+logs/
+*.pid
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+*.so
+.Python
+dist/
+build/
+*.egg-info/
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Git
+.git/
+.gitignore
+.gitattributes
+
+# OpenClaw internal (exclude from public repo)
+.openclaw/memory/
+memory/                 # Daily logs - keep local
+memory/index.md        # Keep local
+.memory/               # Alternative memory dir
+
+# Session files
+*.session
+.session/
+.history/
+
+# Thermal monitor
+discord-bot.pid
+ryzen_temp_monitor.py
+cpu_thermal_monitor.py
+
+# Swap and temp files
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+tmp/
+temp/
+
+# IDE
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Coverage
+coverage/
+.nyc_output/
+
+# Build artifacts
+dist/
+build/
+out/
+next/
+.vercel/
+.netlify/
+
+# Docker volumes (local)
+volumes/
+data/
