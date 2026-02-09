@@ -233,7 +233,7 @@ check_thermal
 echo ""
 
 # Calculate success rate
-local success_rate=0
+success_rate=0
 if [ $TASK_COUNT -gt 0 ]; then
     success_rate=$(( (TASKS_COMPLETED * 100) / TASK_COUNT ))
 fi

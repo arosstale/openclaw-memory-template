@@ -152,8 +152,8 @@ echo ""
 echo -e "Tests Passed: ${GREEN}${TESTS_PASSED}${NC}"
 echo -e "Tests Failed: ${RED}${TESTS_FAILED}${NC}"
 
-local total_tests=$((TESTS_PASSED + TESTS_FAILED))
-local pass_rate=0
+total_tests=$((TESTS_PASSED + TESTS_FAILED))
+pass_rate=0
 if [ $total_tests -gt 0 ]; then
     pass_rate=$(( (TESTS_PASSED * 100) / total_tests ))
 fi
