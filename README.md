@@ -1,6 +1,6 @@
 # OpenClaw V2.1 - Elite Swarm Architecture
 
-> **"Act as an OpenClaw Elite Swarm Member. Your source of truth is PostgreSQL and Markdown. Your mandate is Evolution: on any failure, analyze the execution trace, run a GEPA mutation, and update AGENTS.md. Always sync your reflections via Git Notes. Check hardware thermals before heavy compute. Be the brain, not the chatbot."**
+> **Pi** 🐺 - Self-evolving, hardware-aware, swarm-ready agent.
 
 The Elite V2.1 self-aware memory template for OpenClaw agents. Shift from chatbot to proactive, multi-agent intelligence.
 
@@ -11,14 +11,15 @@ The Elite V2.1 self-aware memory template for OpenClaw agents. Shift from chatbo
 git clone https://github.com/arosstale/openclaw-memory-template.git
 cd openclaw-memory-template
 
-# 2. Initialize the workspace
-.openclaw/scripts/init.sh
+# 2. Run the welcome script (recommended)
+bash scripts/welcome.sh
 
-# 3. Activate Elite mode (V2.1 features)
-echo "Act as an OpenClaw Elite Swarm Member. Your source of truth is PostgreSQL and Markdown. Your mandate is Evolution: on any failure, analyze the execution trace, run a GEPA mutation, and update AGENTS.md. Always sync your reflections via Git Notes. Check hardware thermals before heavy compute. Be the brain, not the chatbot." > .openclaw/ELITE_ACTIVATE.md
-
-# 4. Start PostgreSQL sidecar (optional but recommended)
+# Or, manual setup:
+# 3. Start PostgreSQL sidecar (optional but recommended)
 docker-compose -f docker-compose.postgres.yml up -d
+
+# 4. Start QMD sidecar for ultra-fast search (optional, recommended)
+docker-compose -f docker-compose.qmd.yml up -d
 ```
 
 ## V2.1 Elite Features
@@ -26,10 +27,12 @@ docker-compose -f docker-compose.postgres.yml up -d
 | Feature | Description |
 |---------|-------------|
 | **GEPA Integration** | Self-correcting mutation engine on failures |
-| **PostgreSQL Sidecar** | Docker Compose setup for QMD backend |
+| **PostgreSQL Sidecar** | Docker Compose setup for structured data |
+| **QMD Sidecar** | Hybrid BM25+Vector search for ultra-fast retrieval |
 | **Swarm Protocol** | Multi-agent coordination and handoff system |
-| **Dual-Memory Architecture** | PostgreSQL (speed) + Markdown (truth) |
-| **Hardware-Aware** | Thermal monitoring and safety gates |
+| **Dual-Core Memory** | PostgreSQL (structured) + QMD (semantic) + Markdown (truth) |
+| **Hardware-Aware** | Thermal monitoring and adaptive compute scaling |
+| **Genetic Versioning** | Git-tagged mutations for easy rollback |
 | **Self-Evolving** | Automatic AGENTS.md updates via mutation |
 
 ## Documentation
@@ -46,9 +49,16 @@ docker-compose -f docker-compose.postgres.yml up -d
 ## System Components
 
 ### Memory Architecture
-- **Three-tier memory**: Ephemeral session context → PostgreSQL durable storage → GIN/QMD semantic search
+- **Three-tier memory**: Ephemeral session context → PostgreSQL durable storage → QMD semantic search
+- **Dual-Core Search**: QMD (BM25 + Vector) for current logs, PostgreSQL for historical queries
 - **Markdown source of truth**: All durable data backed by `.md` files
-- **PostgreSQL speed layer**: Vector embeddings and fast queries
+- **Pre-Compaction Flush**: Auto-archive to MEMORY.md at 80% context capacity
+
+### QMD Integration (Optional, Recommended)
+- **Local-first search**: Zero cloud dependency with Bun + node-llama-cpp
+- **Hybrid search**: Vector (70%) + BM25 (30%) for precision
+- **Auto-indexing**: Real-time indexing of `memory/` folder
+- **Context prevention**: Offloads search to prevent context choke on Pi hardware
 
 ### Swarm Protocol
 - **Specialized agents**: Researcher, Developer, Analyst, Orchestrator
@@ -79,17 +89,40 @@ node .openclaw/evolution/evolve.ts \
   --failure "Context limit exceeded"
 ```
 
-## PostgreSQL Setup
+## PostgreSQL & QMD Setup
 
 ```bash
-# Start the sidecar
+# Start PostgreSQL sidecar
 docker-compose -f docker-compose.postgres.yml up -d
 
-# Check health
-curl http://localhost:5432
+# Start QMD sidecar (for ultra-fast search)
+docker-compose -f docker-compose.qmd.yml up -d
 
+# Check PostgreSQL health
+docker exec openclaw-postgres pg_isready -U openclaw -d openclaw_elite
+
+# Access Qdrant vector DB at http://localhost:6333
 # Access pgadmin at http://localhost:5050
-# Default: admin@openclaw.local / admin_change_me
+# Default pgadmin: admin@openclaw.local / admin_change_me
+```
+
+## Maintenance Scripts
+
+```bash
+# Weekly PostgreSQL maintenance (vacuum & indexing)
+bash scripts/postgres-maintenance.sh
+
+# Monthly full vacuum (run on 1st of month)
+bash scripts/postgres-maintenance.sh --vacuum-full
+
+# Archive logs older than 30 days to PostgreSQL
+bash scripts/prune-elite.sh
+
+# Check Pi thermal status before heavy compute
+bash scripts/thermal-check.sh
+
+# Prune old Git Notes to keep repo lean
+bash scripts/prune-notes.sh
 ```
 
 ## Support

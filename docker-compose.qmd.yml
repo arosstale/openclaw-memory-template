@@ -1,0 +1,63 @@
+version: '3.8'
+
+services:
+  qmd-sidecar:
+    image: oven/bun:latest
+    container_name: openclaw-qmd
+    volumes:
+      - ./.openclaw/agents/main/qmd:/root/.qmd
+      - ./memory:/data/memory
+      - ./MEMORY.md:/data/MEMORY.md
+    environment:
+      - XDG_CONFIG_HOME=/root/.qmd/config
+      - XDG_CACHE_HOME=/root/.qmd/cache
+    command: >
+      bash -c "bun install -g https://github.com/tobi/qmd &&
+      qmd collection add memory-root /data/memory --pattern '**/*.md' &&
+      qmd update &&
+      tail -f /dev/null"
+    restart: always
+    networks:
+      - openclaw-elite
+
+  postgres-elite:
+    image: postgres:16-alpine
+    container_name: openclaw-postgres
+    environment:
+      POSTGRES_DB: openclaw_elite
+      POSTGRES_USER: openclaw
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-changeme_in_production}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - openclaw-elite
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U openclaw -d openclaw_elite"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  qdrant-elite:
+    image: qdrant/qdrant:latest
+    container_name: openclaw-qdrant
+    ports:
+      - "6333:6333"
+    volumes:
+      - qdrant:/qdrant/storage
+    networks:
+      - openclaw-elite
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:6333/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+networks:
+  openclaw-elite:
+    driver: bridge
+
+volumes:
+  pgdata:
+  qdrant:
