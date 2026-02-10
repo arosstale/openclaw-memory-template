@@ -42,6 +42,10 @@ class ObservationConfig:
     # Model settings
     observer_temperature: float = 0.3
     reflector_temperature: float = 0.0
+    llm_provider: str = "anthropic"  # "anthropic", "openai", "google"
+
+    # Token counting
+    use_tiktoken: bool = True          # Use Tiktoken for accurate counting
 
     # Storage
     db_path: str = ".openclaw/observational_memory.db"

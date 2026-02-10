@@ -13,7 +13,6 @@ from pathlib import Path
 from datetime import datetime
 from .observer_agent import ObserverAgent
 from .reflector_agent import ReflectorAgent
-from .token_counter import TokenCounter
 from .types import (
     ObservationConfig,
     Observation,
@@ -22,6 +21,21 @@ from .types import (
 )
 from typing import Dict, List, Optional, Tuple
 import json
+
+
+def get_token_counter(config: ObservationConfig):
+    """Get token counter based on configuration."""
+    if config.use_tiktoken:
+        try:
+            from .tiktoken_counter import get_token_counter
+            return get_token_counter()
+        except ImportError:
+            # Fallback to simple counter
+            pass
+
+    # Simple fallback
+    from .token_counter import TokenCounter
+    return TokenCounter()
 
 
 class ObservationalMemory:
@@ -39,7 +53,7 @@ class ObservationalMemory:
         from .types import default_config
 
         self.config = config or default_config()
-        self.token_counter = TokenCounter()
+        self.token_counter = get_token_counter(self.config)
         self.observer = ObserverAgent(self.config)
         self.reflector = ReflectorAgent(self.config)
 

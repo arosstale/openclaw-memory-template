@@ -1,7 +1,7 @@
 """
 Reflector Agent for OpenClaw Observational Memory.
 
-Condenses observations when they exceed threshold.
+Condenses observations when they grow too large using LLM.
 """
 
 from typing import List
@@ -10,10 +10,11 @@ from .types import (
     ObservationConfig,
     PriorityLevel,
 )
+from datetime import datetime
 
 
 class ReflectorAgent:
-    """Condenses observations when they grow too large."""
+    """Condenses observations when they grow too large using LLM."""
 
     SYSTEM_PROMPT = """You are the memory consciousness of an AI assistant. Your memory observation reflections will be ONLY information that assistant has about past interactions with this user.
 
@@ -35,33 +36,144 @@ When consolidating observations:
 - Condense older observations more aggressively, retain more detail for recent ones
 
 OUTPUT FORMAT:
-Your output MUST use structured format:
+Each observation on its own line in this format:
+(24-hour time) [priority] [observation]. (optional date reference)
 
-## Observations
-[Prioritize using 🔴, 🟡, 🟢 and group by date]
+Priorities:
+- 🔴 High: explicit user facts, preferences, goals achieved, critical context
+- 🟡 Medium: project details, learned information, tool results
+- 🟢 Low: minor details, uncertain observations
 
-## Summary
-[Key insights and patterns]
+Your output MUST be ONLY observations, nothing else. Do not include explanations or meta-commentary.
 """
 
     def __init__(self, config: ObservationConfig):
         """Initialize Reflector agent."""
         self.config = config
+        self.llm_client = None
+
+        # Try to initialize LLM client
+        try:
+            from .llm_client import get_llm_client
+            provider = getattr(config, 'llm_provider', 'anthropic')
+            self.llm_client = get_llm_client(provider)
+        except Exception:
+            # Fallback to simple condensation
+            self.llm_client = None
 
     def reflect(self, observations: List[Observation]) -> List[Observation]:
         """
         Reflect and condense observations.
 
-        Returns:
-            - Condensed list of observations
-        """
-        # In production, this would call LLM
-        # For now, return a simple condensation
+        Args:
+            observations: List of observations to condense
 
-        return self._simple_condensation(observations)
+        Returns:
+            Condensed list of observations
+        """
+        if not observations:
+            return []
+
+        if self.llm_client:
+            return self._llm_reflection(observations)
+        else:
+            return self._simple_condensation(observations)
+
+    def _llm_reflection(self, observations: List[Observation]) -> List[Observation]:
+        """Reflect and condense using LLM."""
+        # Format observations for LLM
+        obs_text = self._format_observations_for_llm(observations)
+
+        prompt = f"""Reflect on and condense the following observations.
+
+OBSERVATIONS TO REFLECT:
+{obs_text}
+
+Your task:
+1. Reorganize and streamline observations
+2. Draw connections and conclusions
+3. Combine related items
+4. Remove redundancy while preserving critical information
+5. Retain temporal context (dates/times)
+
+Output ONLY the condensed observations, nothing else."""
+
+        try:
+            response = self.llm_client.generate(
+                prompt=prompt,
+                system=self.SYSTEM_PROMPT,
+                temperature=self.config.reflector_temperature,
+                max_tokens=1000,
+            )
+            return self._parse_observations(response)
+        except Exception as e:
+            # Fallback to simple condensation on error
+            return self._simple_condensation(observations)
+
+    def _parse_observations(self, text: str) -> List[Observation]:
+        """Parse observations from LLM response."""
+        observations = []
+
+        lines = text.strip().split('\n')
+        for line in lines:
+            line = line.strip()
+
+            # Skip empty lines and meta-commentary
+            if not line or line.startswith('#') or line.startswith('Here') or line.startswith('The'):
+                continue
+
+            # Parse observation: (HH:MM) [priority] observation
+            if line.startswith('(') and ')' in line:
+                # Extract time
+                time_end = line.find(')')
+                time_str = line[1:time_end]
+                remaining = line[time_end+1:].strip()
+
+                # Extract priority
+                if remaining.startswith('🔴'):
+                    priority = PriorityLevel.RED
+                    remaining = remaining[1:].strip()
+                elif remaining.startswith('🟡'):
+                    priority = PriorityLevel.YELLOW
+                    remaining = remaining[1:].strip()
+                elif remaining.startswith('🟢'):
+                    priority = PriorityLevel.GREEN
+                    remaining = remaining[1:].strip()
+                else:
+                    # Default priority
+                    priority = PriorityLevel.YELLOW
+
+                # Extract content
+                content = remaining
+
+                # Parse time (use original observation's time if possible)
+                try:
+                    hour, minute = map(int, time_str.split(':'))
+                    timestamp = datetime.now().replace(hour=hour, minute=minute, second=0, microsecond=0)
+                except:
+                    timestamp = datetime.now()
+
+                obs = Observation(
+                    timestamp=timestamp,
+                    priority=priority,
+                    content=content,
+                    referenced_date=None,
+                )
+                observations.append(obs)
+
+        return observations
+
+    def _format_observations_for_llm(self, observations: List[Observation]) -> str:
+        """Format observations for LLM input."""
+        lines = []
+        for obs in observations:
+            time_str = obs.timestamp.strftime("%H:%M")
+            lines.append(f"({time_str}) {obs.priority} {obs.content}")
+
+        return '\n'.join(lines)
 
     def _simple_condensation(self, observations: List[Observation]) -> List[Observation]:
-        """Simple condensation without LLM (for testing)."""
+        """Simple condensation without LLM (fallback)."""
         # Group by priority - keep only high and medium
         condensed = [
             obs for obs in observations
