@@ -1,10 +1,12 @@
 # OpenClaw Memory Management Skill
 
-> 🧠 Search, compress, and navigate OpenClaw memory (MEMORY.md, AGENTS.md, memory/)
+> 🧠 Search, compress, and navigate OpenClaw memory (MEMORY.md, AGENTS.md, memory/) with security hardening
 
-**Version**: 1.0.0
+**Version**: 1.1.0 - SECURITY HARDENED
 **Author**: Pi-Agent
 **License**: MIT
+
+> ⚠️ **Security**: This skill includes comprehensive protections against command injection, path traversal, prompt injection, and DoS attacks. See [SECURITY.md](SECURITY.md) for details.
 
 ---
 
@@ -16,6 +18,7 @@
 - 🤖 **Agent Listing**: Display AGENTS.md contents
 - 📅 **Recent Entries**: Show recently added memory files
 - 🧹 **Clean Old**: Remove stale memory files (>90 days)
+- 🛡️ **Security Hardened**: Protection against injection attacks, path traversal, DoS
 
 ---
 
@@ -156,6 +159,46 @@ openclaw-memory.sh stats
     ├── 2026-01-27.md
     └── ...
 ```
+
+---
+
+## Security
+
+The skill includes multiple security layers to protect against attacks:
+
+### Protections
+
+| Threat | Mitigation |
+|--------|------------|
+| Command Injection | Input validation, dangerous character filtering |
+| Path Traversal | Path resolution, symlink checks, whitelist |
+| Option Injection | Fixed strings, `--` delimiter |
+| Denial of Service | Operation limits (max results, max files) |
+| Prompt Injection | Input sanitization, no AI processing |
+
+### Security Logging
+
+All security events are logged to `/tmp/openclaw-memory.log`:
+- Command executions
+- Input validation failures
+- Path traversal attempts
+- Dangerous character detection
+
+### Running Security Tests
+
+```bash
+cd skills/openclaw-memory
+./test-security.sh
+```
+
+### Detailed Documentation
+
+See [SECURITY.md](SECURITY.md) for:
+- Complete threat model
+- All security features explained
+- Attack examples and mitigations
+- Testing procedures
+- Compliance information
 
 ---
 
