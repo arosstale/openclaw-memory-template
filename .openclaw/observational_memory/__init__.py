@@ -46,6 +46,47 @@ class ObservationalMemory:
         # Initialize SQLite storage
         self._init_database()
 
+    def _init_database(self):
+        """Initialize SQLite database for observations."""
+        db_path = Path(self.config.db_path)
+        db_path.parent.mkdir(parents=True, exist_ok=True)
+
+        conn = sqlite3.connect(db_path)
+        cursor = conn.cursor()
+
+        # Create observations table
+        cursor.execute("""
+            CREATE TABLE IF NOT EXISTS observations (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                thread_id TEXT NOT NULL,
+                timestamp TEXT NOT NULL,
+                priority TEXT NOT NULL,
+                content TEXT NOT NULL,
+                referenced_date TEXT,
+                created_at TEXT DEFAULT CURRENT_TIMESTAMP
+            )
+        """)
+
+        # Create memory_records table
+        cursor.execute("""
+            CREATE TABLE IF NOT EXISTS memory_records (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                thread_id TEXT UNIQUE NOT NULL,
+                current_task TEXT,
+                suggested_response TEXT,
+                last_observed_at TEXT,
+                updated_at TEXT DEFAULT CURRENT_TIMESTAMP
+            )
+        """)
+
+        # Create index on thread_id
+        cursor.execute("""
+            CREATE INDEX IF NOT EXISTS idx_thread_id ON observations(thread_id)
+        """)
+
+        conn.commit()
+        conn.close()
+
     def get_observation_record(self, thread_id: str) -> Optional[ObservationalMemoryRecord]:
         """Get memory record for a thread from SQLite database."""
         db_path = Path(self.config.db_path)
