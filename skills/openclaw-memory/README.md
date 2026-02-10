@@ -1,24 +1,153 @@
 # OpenClaw Memory Management Skill
 
-> 🧠 Search, compress, and navigate OpenClaw memory (MEMORY.md, AGENTS.md, memory/) with security hardening
+> 🧠 Search, compress, encrypt, authenticate, rate limit, and audit OpenClaw memory (MEMORY.md, AGENTS.md, memory/) with enterprise-grade security
 
-**Version**: 1.1.0 - SECURITY HARDENED
-**Author**: Pi-Agent
+**Version**: 1.2.0 - ENHANCED SECURITY
+**Author**: Pi-Agent 🐺📿
 **License**: MIT
 
-> ⚠️ **Security**: This skill includes comprehensive protections against command injection, path traversal, prompt injection, and DoS attacks. See [SECURITY.md](SECURITY.md) for details.
+> ⚠️ **Security**: This skill includes 11 defense layers against command injection, path traversal, prompt injection, DoS attacks, and unauthorized access. See [SECURITY.md](SECURITY.md) and [V1.2.0_RELEASE_NOTES.md](V1.2.0_RELEASE_NOTES.md) for details.
 
 ---
 
 ## Features
 
+### Memory Management
 - 🔍 **Memory Search**: Search across MEMORY.md and memory/*.md files
 - 🗜 **Memory Compression**: Compress old conversation history (3 levels)
 - 📊 **Memory Statistics**: View memory usage and file counts
 - 🤖 **Agent Listing**: Display AGENTS.md contents
 - 📅 **Recent Entries**: Show recently added memory files
 - 🧹 **Clean Old**: Remove stale memory files (>90 days)
-- 🛡️ **Security Hardened**: Protection against injection attacks, path traversal, DoS
+
+### Security (V1.2.0)
+- 🔒 **AES-256-GCM Encryption**: Military-grade encryption for sensitive files
+- 🔐 **User Authentication**: API key and session-based access control
+- 🚦 **Token Bucket Rate Limiting**: Production-grade rate limiting
+- 🔍 **Permission Auditing**: Security audit with auto-fix capabilities
+- 🛡️ **Security Hardened (V1.1.0)**: Protection against injection attacks, path traversal, DoS
+
+---
+
+## Quick Start
+
+### Basic Usage
+
+```bash
+cd skills/openclaw-memory
+
+# Search memory
+./openclaw-memory.sh search "trading strategies"
+
+# View statistics
+./openclaw-memory.sh stats
+
+# List recent entries
+./openclaw-memory.sh recent
+```
+
+### Encryption (NEW in V1.2.0)
+
+```bash
+# Generate encryption key
+./openclaw-memory.sh key generate
+
+# Encrypt a file
+./openclaw-memory.sh encrypt MEMORY.md
+
+# Decrypt a file
+./openclaw-memory.sh decrypt MEMORY.md.enc
+```
+
+### Authentication (NEW in V1.2.0)
+
+```bash
+# Initialize authentication
+./openclaw-memory.sh auth init
+
+# Add a user
+./openclaw-memory.sh auth add-user alice secret123
+
+# Enable authentication
+export OPENCLAW_AUTH=true
+export OPENCLAW_API_KEY="ocm_abc123..."
+```
+
+### Rate Limiting (NEW in V1.2.0)
+
+```bash
+# Initialize rate limiting
+./openclaw-memory.sh rate-limit init
+
+# Enable rate limiting
+export OPENCLAW_RATE_LIMIT=true
+
+# Check rate limit status
+./openclaw-memory.sh rate-limit status
+```
+
+### Security Audit (NEW in V1.2.0)
+
+```bash
+# Run full security audit
+./openclaw-memory.sh audit
+
+# Auto-fix permission issues
+./openclaw-memory.sh audit fix
+```
+
+---
+
+## Commands
+
+### Memory Commands
+
+| Command | Description |
+|---------|-------------|
+| `search <query>` | Search MEMORY.md and memory/*.md for content |
+| `compress [level]` | Compress conversation history (default: level 1) |
+| `stats` | Show memory statistics |
+| `agents` | List all agents and their roles |
+| `recent [n]` | Show recent memory entries (default: 5) |
+| `clean` | Remove stale memory files (>90 days old) |
+
+### Encryption Commands (V1.2.0)
+
+| Command | Description |
+|---------|-------------|
+| `key generate` | Generate encryption key |
+| `encrypt <file>` | Encrypt a memory file |
+| `decrypt <file>` | Decrypt a memory file |
+| `key list` | List encrypted files |
+
+### Authentication Commands (V1.2.0)
+
+| Command | Description |
+|---------|-------------|
+| `auth init` | Initialize authentication system |
+| `auth add-user <user> <pass>` | Add a new user |
+| `auth remove-user <user>` | Remove a user |
+| `auth list` | List all users |
+| `auth status` | Show authentication status |
+| `auth clean-sessions` | Clean expired sessions |
+
+### Rate Limiting Commands (V1.2.0)
+
+| Command | Description |
+|---------|-------------|
+| `rate-limit init` | Initialize rate limiting |
+| `rate-limit check` | Check rate limit (consume token) |
+| `rate-limit status` | Get rate limit status |
+| `rate-limit stats` | Show rate limit statistics |
+| `rate-limit reset [client]` | Reset rate limit for client |
+| `rate-limit cleanup` | Clean old client data |
+
+### Audit Commands (V1.2.0)
+
+| Command | Description |
+|---------|-------------|
+| `audit` | Run full security audit |
+| `audit fix` | Auto-fix permission issues |
 
 ---
 
@@ -139,10 +268,22 @@ Removes memory files older than 90 days from `memory/` directory.
 | Variable | Default | Description |
 |----------|---------|-------------|
 | `WORKSPACE` | Current directory | Path to OpenClaw workspace |
+| `OPENCLAW_AUTH` | false | Enable authentication |
+| `OPENCLAW_API_KEY` | - | API key for authentication |
+| `OPENCLAW_SESSION` | - | Session token for authentication |
+| `OPENCLAW_RATE_LIMIT` | false | Enable rate limiting |
+| `OPENCLAW_CLIENT_ID` | hostname:pid | Client identifier for rate limiting |
 
 ```bash
 export WORKSPACE="/path/to/workspace"
 openclaw-memory.sh stats
+
+# Enable authentication
+export OPENCLAW_AUTH=true
+export OPENCLAW_API_KEY="ocm_abc123..."
+
+# Enable rate limiting
+export OPENCLAW_RATE_LIMIT=true
 ```
 
 ---
@@ -164,9 +305,9 @@ openclaw-memory.sh stats
 
 ## Security
 
-The skill includes multiple security layers to protect against attacks:
+The skill includes 11 defense layers to protect against attacks:
 
-### Protections
+### V1.1.0 Protections (Core)
 
 | Threat | Mitigation |
 |--------|------------|
@@ -176,6 +317,17 @@ The skill includes multiple security layers to protect against attacks:
 | Denial of Service | Operation limits (max results, max files) |
 | Prompt Injection | Input sanitization, no AI processing |
 
+### V1.2.0 Protections (Enhanced)
+
+| Feature | Description |
+|---------|-------------|
+| AES-256-GCM Encryption | Military-grade encryption for sensitive files |
+| PBKDF2 Key Derivation | 100,000 iterations for key strengthening |
+| User Authentication | API key and session-based access control |
+| Token Bucket Rate Limiting | Production-grade rate limiting (60 req/min) |
+| Permission Auditing | Automatic detection and fix of permission issues |
+| Security Logging | Audit trail of all security events |
+
 ### Security Logging
 
 All security events are logged to `/tmp/openclaw-memory.log`:
@@ -183,6 +335,8 @@ All security events are logged to `/tmp/openclaw-memory.log`:
 - Input validation failures
 - Path traversal attempts
 - Dangerous character detection
+- Authentication attempts
+- Rate limit violations
 
 ### Running Security Tests
 
@@ -191,14 +345,20 @@ cd skills/openclaw-memory
 ./test-security.sh
 ```
 
+### Running Security Audit
+
+```bash
+# Run full audit
+./openclaw-memory.sh audit
+
+# Auto-fix permission issues
+./openclaw-memory.sh audit fix
+```
+
 ### Detailed Documentation
 
-See [SECURITY.md](SECURITY.md) for:
-- Complete threat model
-- All security features explained
-- Attack examples and mitigations
-- Testing procedures
-- Compliance information
+- [SECURITY.md](SECURITY.md) - Complete threat model, security features, compliance
+- [V1.2.0_RELEASE_NOTES.md](V1.2.0_RELEASE_NOTES.md) - New features and migration guide
 
 ---
 

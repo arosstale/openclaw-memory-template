@@ -1,10 +1,10 @@
 {
   "name": "openclaw-memory",
-  "version": "1.1.0",
-  "description": "OpenClaw memory management - Search, compress, and navigate AGENTS.md, MEMORY.md, and memory/ directory with security hardening",
+  "version": "1.2.0",
+  "description": "OpenClaw memory management with enhanced security - Search, compress, encrypt, authenticate, rate limit, and audit AGENTS.md, MEMORY.md, and memory/ directory",
   "author": "Pi-Agent",
   "license": "MIT",
-  "keywords": ["openclaw", "memory", "search", "compression", "agents", "security"],
+  "keywords": ["openclaw", "memory", "search", "compression", "agents", "security", "encryption", "authentication", "rate-limiting", "audit"],
   "main": "openclaw-memory.sh",
   "assets": {
     "logo": "assets/icon.png",
@@ -13,21 +13,40 @@
   "dependencies": {
     "openclaw": ">=2.0"
   },
+  "modules": [
+    "encryption.sh",
+    "authentication.sh",
+    "rate-limit.sh",
+    "audit.sh"
+  ],
   "capabilities": [
     "memory_search",
     "memory_compress",
     "agents_list",
     "memory_stats",
+    "file_encryption",
+    "user_authentication",
+    "rate_limiting",
+    "security_audit",
     "security_hardened"
   ],
   "security": {
-    "features": [
+    "v1.1_features": [
       "input_validation",
       "command_whitelisting",
       "path_traversal_protection",
       "command_injection_prevention",
       "dos_protection",
       "security_logging"
+    ],
+    "v1.2_features": [
+      "aes_256_gcm_encryption",
+      "pbkdf2_key_derivation",
+      "api_key_authentication",
+      "session_management",
+      "token_bucket_rate_limiting",
+      "permission_auditing",
+      "auto_fix_vulnerabilities"
     ]
   }
 }

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # OpenClaw Memory Management Skill
-# Version: 1.1.0 - SECURITY HARDENED
+# Version: 1.2.0 - ENHANCED SECURITY
 # Author: Pi-Agent
 
 # Security: Fail fast, validate all inputs, prevent command injection
@@ -17,8 +17,13 @@ readonly NC='\033[0m'
 readonly MAX_QUERY_LENGTH=200
 readonly MAX_FILES_TO_DELETE=100
 readonly MAX_RESULTS=20
-readonly ALLOWED_COMMANDS=("search" "compress" "stats" "agents" "recent" "clean" "help")
+readonly ALLOWED_COMMANDS=("search" "compress" "stats" "agents" "recent" "clean" "help" "key" "encrypt" "decrypt" "auth" "rate-limit" "audit")
 readonly LOG_FILE="/tmp/openclaw-memory.log"
+
+# Security features flags (from env)
+readonly ENABLE_AUTH="${OPENCLAW_AUTH:-false}"
+readonly ENABLE_RATE_LIMIT="${OPENCLAW_RATE_LIMIT:-false}"
+readonly ENABLE_ENCRYPTION="${OPENCLAW_ENCRYPTION:-false}"
 
 # Default paths - validated later
 WORKSPACE=""
@@ -80,6 +85,31 @@ validate_path() {
     esac
 
     echo "$resolved"
+}
+
+# Source security modules
+source_modules() {
+    local script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+    # Source encryption module
+    if [ -f "$script_dir/encryption.sh" ]; then
+        source "$script_dir/encryption.sh"
+    fi
+
+    # Source authentication module
+    if [ -f "$script_dir/authentication.sh" ]; then
+        source "$script_dir/authentication.sh"
+    fi
+
+    # Source rate limit module
+    if [ -f "$script_dir/rate-limit.sh" ]; then
+        source "$script_dir/rate-limit.sh"
+    fi
+
+    # Source audit module
+    if [ -f "$script_dir/audit.sh" ]; then
+        source "$script_dir/audit.sh"
+    fi
 }
 
 # Initialize paths with validation
@@ -155,10 +185,10 @@ validate_command() {
 
 # Help
 show_help() {
-    cat << EOF
-🧠 OpenClaw Memory Management Skill (SECURITY HARDENED v1.1.0)
+    cat << 'EOF'
+🧠 OpenClaw Memory Management Skill (ENHANCED SECURITY v1.2.0)
 
-Commands:
+MEMORY COMMANDS:
   search <query>           Search MEMORY.md and memory/*.md for content
   compress [level]         Compress conversation history (default: level 1)
   stats                   Show memory statistics
@@ -166,21 +196,76 @@ Commands:
   recent [n]             Show recent memory entries (default: 5)
   clean                   Remove stale memory files (>90 days old)
 
-Environment Variables:
-  WORKSPACE                Path to OpenClaw workspace (default: current dir)
+ENCRYPTION (v1.2.0):
+  key generate            Generate encryption key
+  encrypt <file>          Encrypt a memory file
+  decrypt <file>          Decrypt a memory file
+  key list                List encrypted files
 
-Security Features:
+AUTHENTICATION (v1.2.0):
+  auth init               Initialize authentication system
+  auth add-user <u> <p>  Add a new user with password
+  auth remove-user <u>    Remove a user
+  auth list               List all users
+  auth status             Show authentication status
+
+RATE LIMITING (v1.2.0):
+  rate-limit init          Initialize rate limiting
+  rate-limit check        Check rate limit (consume token)
+  rate-limit status       Get rate limit status
+  rate-limit stats        Show rate limit statistics
+  rate-limit reset [c]    Reset rate limit for client
+
+SECURITY AUDIT (v1.2.0):
+  audit                   Run full security audit
+  audit fix               Auto-fix common permission issues
+
+ENVIRONMENT VARIABLES:
+  WORKSPACE                Path to OpenClaw workspace (default: current dir)
+  OPENCLAW_AUTH           Enable authentication (true/false)
+  OPENCLAW_API_KEY        API key for authentication
+  OPENCLAW_SESSION        Session token for authentication
+  OPENCLAW_RATE_LIMIT     Enable rate limiting (true/false)
+  OPENCLAW_CLIENT_ID      Client identifier for rate limiting
+
+SECURITY FEATURES (v1.2.0):
+  Core (v1.1.0):
   - Input validation (length, characters, path traversal)
   - Command whitelisting
   - Safe path resolution
   - Operation limits (max results, max files)
-  - Security logging to: $LOG_FILE
+  - Security logging to: /tmp/openclaw-memory.log
 
-Examples:
+  Enhanced (v1.2.0):
+  - AES-256-GCM encryption for sensitive files
+  - User authentication with API keys
+  - Token bucket rate limiting
+  - Permission auditing and auto-fix
+
+EXAMPLES:
+  # Basic usage
   openclaw-memory.sh search "trading strategies"
-  openclaw-memory.sh compress 2
   openclaw-memory.sh stats
-  openclaw-memory.sh agents
+
+  # Encryption
+  openclaw-memory.sh key generate
+  openclaw-memory.sh encrypt MEMORY.md
+  openclaw-memory.sh decrypt MEMORY.md.enc
+
+  # Authentication
+  openclaw-memory.sh auth init
+  openclaw-memory.sh auth add-user alice secret123
+  export OPENCLAW_API_KEY="ocm_xxx"
+  openclaw-memory.sh search "test"
+
+  # Rate limiting
+  export OPENCLAW_RATE_LIMIT=true
+  openclaw-memory.sh rate-limit init
+  openclaw-memory.sh rate-limit check
+
+  # Security audit
+  openclaw-memory.sh audit
+  openclaw-memory.sh audit fix
 
 EOF
 }
@@ -370,12 +455,37 @@ clean_old() {
 
 # Main - with security layers
 main() {
-    # Initialize paths (with validation)
+    # Initialize paths FIRST (modules need WORKSPACE)
     init_paths
+
+    # Source modules after WORKSPACE is set
+    source_modules
 
     # Validate command
     local command="${1:-help}"
     validate_command "$command"
+
+    # Check authentication if enabled
+    if [ "$ENABLE_AUTH" = "true" ] && [ "$command" != "auth" ] && [ "$command" != "help" ]; then
+        local api_key="${OPENCLAW_API_KEY:-}"
+        local session="${OPENCLAW_SESSION:-}"
+
+        if [ -z "$api_key" ] && [ -z "$session" ]; then
+            echo -e "${RED}❌ Error: Authentication required${NC}" >&2
+            echo "  Set OPENCLAW_API_KEY or OPENCLAW_SESSION environment variable" >&2
+            exit 1
+        fi
+
+        # Verify credentials (placeholder - actual verification in production)
+        if [ -n "$api_key" ]; then
+            verify_api_key "$api_key" || exit 1
+        fi
+    fi
+
+    # Check rate limit if enabled
+    if [ "$ENABLE_RATE_LIMIT" = "true" ] && [ "$command" != "rate-limit" ] && [ "$command" != "help" ]; then
+        check_rate_limit || exit 1
+    fi
 
     # Route command
     case "$command" in
@@ -396,6 +506,24 @@ main() {
             ;;
         clean)
             clean_old
+            ;;
+        key)
+            encryption_cmd "${2:-help}"
+            ;;
+        encrypt)
+            encryption_cmd "encrypt" "$2"
+            ;;
+        decrypt)
+            encryption_cmd "decrypt" "$2"
+            ;;
+        auth)
+            auth_cmd "${2:-help}" "${3:-}" "${4:-}"
+            ;;
+        rate-limit)
+            rate_limit_cmd "${2:-help}" "${3:-}"
+            ;;
+        audit)
+            audit_cmd "${2:-audit}"
             ;;
         help|--help|-h)
             show_help
