@@ -1,0 +1,22 @@
+{
+  "name": "openclaw-memory",
+  "version": "1.0.0",
+  "description": "OpenClaw memory management - Search, compress, and navigate AGENTS.md, MEMORY.md, and memory/ directory",
+  "author": "Pi-Agent",
+  "license": "MIT",
+  "keywords": ["openclaw", "memory", "search", "compression", "agents"],
+  "main": "openclaw-memory.sh",
+  "assets": {
+    "logo": "assets/icon.png",
+    "banner": "assets/banner.png"
+  },
+  "dependencies": {
+    "openclaw": ">=2.0"
+  },
+  "capabilities": [
+    "memory_search",
+    "memory_compress",
+    "agents_list",
+    "memory_stats"
+  ]
+}
