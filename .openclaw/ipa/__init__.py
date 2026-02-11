@@ -1,13 +1,3 @@
-from .ipa_evaluator import (
-    InteractionChunk,
-    ChunkEvaluationResult,
-    InteractionChunker,
-    IPAEvaluator,
-)
+from .ipa_evaluator import IPAEvaluator, InteractionChunk
 
-__all__ = [
-    "InteractionChunk",
-    "ChunkEvaluationResult",
-    "InteractionChunker",
-    "IPAEvaluator",
-]
+__all__ = ["IPAEvaluator", "InteractionChunk"]
