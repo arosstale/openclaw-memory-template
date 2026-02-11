@@ -49,6 +49,7 @@ Based on the ALMA research paper (https://arxiv.org/pdf/2602.07755):
 |----------|-------------|
 | **ALMA Meta-Learning** | Automatic design discovery and optimization |
 | **Observational Memory (PAOM)** | Context compression + temporal tracking |
+| **Knowledge System** | Semantic codebase search and indexing |
 | **ALMA+PAOM Integration** | Self-improving memory system |
 | **LLM Integration** | Anthropic, OpenAI, Google support |
 | **Tiktoken** | 100% accurate token counting |
