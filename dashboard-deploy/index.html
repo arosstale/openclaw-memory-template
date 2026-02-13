@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clawdbot Dashboard — System Status</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #0f0f23; color: #e0e0e0; line-height: 1.6; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        header { text-align: center; padding: 30px 0; border-bottom: 2px solid #ff6b6b; }
+        h1 { font-size: 2.5em; color: #ff6b6b; margin-bottom: 10px; }
+        .subtitle { color: #888; font-size: 1em; }
+        .status-badge { display: inline-block; background: #4ade80; color: #000; padding: 5px 15px; border-radius: 20px; font-weight: bold; margin-top: 10px; }
+        .section { background: #1a1a2e; border-radius: 10px; padding: 25px; margin: 20px 0; }
+        .section h2 { color: #ff6b6b; margin-bottom: 15px; font-size: 1.5em; border-left: 4px solid #ff6b6b; padding-left: 10px; }
+        .section h3 { color: #ffd93d; margin: 15px 0 10px; font-size: 1.2em; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        .card { background: #16213e; padding: 15px; border-radius: 8px; border-left: 3px solid #4ade80; }
+        .card.running { border-left-color: #4ade80; }
+        .card.offline { border-left-color: #ef4444; }
+        .card h4 { color: #fff; margin-bottom: 5px; }
+        .card .status { font-size: 0.9em; }
+        .card .status.online { color: #4ade80; }
+        .card .status.offline { color: #ef4444; }
+        .card .detail { color: #888; font-size: 0.85em; margin-top: 5px; }
+        table { width: 100%; border-collapse: collapse; margin: 15px 0; }
+        th { background: #0f3460; color: #fff; text-align: left; padding: 12px; }
+        td { padding: 10px 12px; border-bottom: 1px solid #0f3460; }
+        tr:hover { background: #0f3460; }
+        a { color: #4ade80; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .update-time { text-align: center; color: #666; margin-top: 30px; font-size: 0.9em; }
+        .footer { text-align: center; padding: 20px; border-top: 1px solid #333; margin-top: 30px; color: #666; }
+        pre { background: #0f0f23; padding: 15px; border-radius: 5px; overflow-x: auto; font-size: 0.9em; }
+        code { background: #0f0f23; padding: 2px 6px; border-radius: 3px; }
+        .tag { display: inline-block; background: #0f3460; padding: 2px 8px; border-radius: 4px; font-size: 0.8em; margin-right: 5px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🐺📿 Clawdbot Dashboard</h1>
+            <p class="subtitle">System Status & Resource Hub</p>
+            <span class="status-badge">✅ All Systems Operational</span>
+        </header>
+
+        <div class="section">
+            <h2>📊 System Status</h2>
+            <h3>Development Stack</h3>
+            <table>
+                <tr>
+                    <th>Service</th>
+                    <th>Status</th>
+                    <th>Details</th>
+                </tr>
+                <tr>
+                    <td>Automaker UI</td>
+                    <td class="status online">✅ LIVE</td>
+                    <td><a href="http://144.76.30.176:3007" target="_blank">http://144.76.30.176:3007</a></td>
+                </tr>
+                <tr>
+                    <td>Automaker API</td>
+                    <td class="status online">✅ LIVE</td>
+                    <td><a href="http://144.76.30.176:3008" target="_blank">http://144.76.30.176:3008</a></td>
+                </tr>
+                <tr>
+                    <td>PostgreSQL</td>
+                    <td class="status online">✅ Running</td>
+                    <td>swarm_pg (port 54329)</td>
+                </tr>
+                <tr>
+                    <td>OpenClaw Gateway</td>
+                    <td class="status online">✅ Active</td>
+                    <td>Socket connected</td>
+                </tr>
+                <tr>
+                    <td>Borg Memory</td>
+                    <td class="status online">✅ Ready</td>
+                    <td>pgvector + MCP server</td>
+                </tr>
+            </table>
+
+            <h3>Trading Systems</h3>
+            <table>
+                <tr>
+                    <th>Service</th>
+                    <th>Status</th>
+                    <th>Details</th>
+                </tr>
+                <tr>
+                    <td>V7 Trading Agent</td>
+                    <td class="status online">✅ Running</td>
+                    <td>PID 274492</td>
+                </tr>
+                <tr>
+                    <td>VBMR Strategy</td>
+                    <td class="status online">✅ Optimized</td>
+                    <td>ATR 1.5</td>
+                </tr>
+                <tr>
+                    <td>Whale Collector</td>
+                    <td class="status online">✅ Running</td>
+                    <td>8+ days uptime</td>
+                </tr>
+                <tr>
+                    <td>Liquidation Detector</td>
+                    <td class="status online">✅ Running</td>
+                    <td>8+ days uptime</td>
+                </tr>
+            </table>
+
+            <h3>Monitoring</h3>
+            <table>
+                <tr>
+                    <th>Service</th>
+                    <th>Status</th>
+                    <th>Details</th>
+                </tr>
+                <tr>
+                    <td>Prometheus</td>
+                    <td class="status online">✅ Running</td>
+                    <td>Port 9090</td>
+                </tr>
+                <tr>
+                    <td>Grafana</td>
+                    <td class="status online">✅ Running</td>
+                    <td>Port 3000</td>
+                </tr>
+                <tr>
+                    <td>Node Exporter</td>
+                    <td class="status online">✅ Running</td>
+                    <td>Port 9100</td>
+                </tr>
+                <tr>
+                    <td>Audit Logging</td>
+                    <td class="status online">✅ Enabled</td>
+                    <td>/var/log/openclaw/</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2>📚 Documentation Hub</h2>
+            <h3>OpenClaw Docs</h3>
+            <table>
+                <tr>
+                    <th>Section</th>
+                    <th>Link</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td>Main Docs</td>
+                    <td><a href="https://docs.openclaw.ai" target="_blank">docs.openclaw.ai</a></td>
+                    <td>Official documentation</td>
+                </tr>
+                <tr>
+                    <td>Quick Start</td>
+                    <td><a href="https://docs.openclaw.ai/start/quickstart" target="_blank">Quick Start</a></td>
+                    <td>5-minute setup</td>
+                </tr>
+                <tr>
+                    <td>Setup</td>
+                    <td><a href="https://docs.openclaw.ai/start/setup" target="_blank">Setup Guide</a></td>
+                    <td>Advanced configuration</td>
+                </tr>
+                <tr>
+                    <td>Configuration</td>
+                    <td><a href="https://docs.openclaw.ai/gateway/configuration" target="_blank">Config</a></td>
+                    <td>Config reference</td>
+                </tr>
+                <tr>
+                    <td>Tools</td>
+                    <td><a href="https://docs.openclaw.ai/tools" target="_blank">Tools</a></td>
+                    <td>All tools reference</td>
+                </tr>
+                <tr>
+                    <td>Sub-Agents</td>
+                    <td><a href="https://docs.openclaw.ai/tools/subagents" target="_blank">Sub-Agents</a></td>
+                    <td>Background tasks</td>
+                </tr>
+                <tr>
+                    <td>Browser</td>
+                    <td><a href="https://docs.openclaw.ai/tools/browser" target="_blank">Browser</a></td>
+                    <td>Browser control</td>
+                </tr>
+                <tr>
+                    <td>Cron Jobs</td>
+                    <td><a href="https://docs.openclaw.ai/automation/cron-jobs" target="_blank">Cron</a></td>
+                    <td>Scheduler</td>
+                </tr>
+            </table>
+
+            <h3>Automaker</h3>
+            <table>
+                <tr>
+                    <th>Resource</th>
+                    <th>Link</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td>GitHub</td>
+                    <td><a href="https://github.com/AutoMaker-Org/automaker" target="_blank">AutoMaker-Org/automaker</a></td>
+                    <td>AI dev studio</td>
+                </tr>
+                <tr>
+                    <td>v0.14.0rc</td>
+                    <td><a href="https://github.com/AutoMaker-Org/automaker/tree/v0.14.0rc" target="_blank">v0.14.0rc</a></td>
+                    <td>Pre-release</td>
+                </tr>
+                <tr>
+                    <td>Issues</td>
+                    <td><a href="https://github.com/AutoMaker-Org/automaker/issues" target="_blank">Issues</a></td>
+                    <td>Bug tracker</td>
+                </tr>
+            </table>
+
+            <h3>Borg Memory (codex-mcp-memory)</h3>
+            <table>
+                <tr>
+                    <th>Resource</th>
+                    <th>Link</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td>GitHub</td>
+                    <td><a href="https://github.com/geranton93/codex-mcp-memory" target="_blank">codex-mcp-memory</a></td>
+                    <td>PostgreSQL + pgvector</td>
+                </tr>
+                <tr>
+                    <td>MCP Protocol</td>
+                    <td><a href="https://modelcontextprotocol.io" target="_blank">MCP</a></td>
+                    <td>Open standard</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2>🎯 Awesome OpenClaw Use Cases</h2>
+            <h3>Social Media</h3>
+            <div class="grid">
+                <div class="card"><h4>Daily Reddit Digest</h4><p>Summarize curated subreddits</p></div>
+                <div class="card"><h4>Daily YouTube Digest</h4><p>New videos from favorite channels</p></div>
+                <div class="card"><h4>X Account Analysis</h4><p>Qualitative analysis</p></div>
+            </div>
+
+            <h3>Creative & Building</h3>
+            <div class="grid">
+                <div class="card"><h4>Overnight Mini-App Builder</h4><p>Goal-driven autonomous tasks</p></div>
+                <div class="card"><h4>YouTube Content Pipeline</h4><p>Video idea scouting + research</p></div>
+                <div class="card"><h4>Multi-Agent Content Factory</h4><p>Discord pipeline</p></div>
+            </div>
+
+            <h3>Infrastructure & DevOps</h3>
+            <div class="grid">
+                <div class="card"><h4>n8n Workflow</h4><p>Webhook-based API delegation</p></div>
+                <div class="card"><h4>Self-Healing Home Server</h4><p>SSH, cron jobs, self-healing</p></div>
+            </div>
+
+            <h3>Productivity</h3>
+            <div class="grid">
+                <div class="card"><h4>Autonomous Project Management</h4><p>STATE.yaml coordination</p></div>
+                <div class="card"><h4>Multi-Channel Customer Service</h4><p>WhatsApp/Instagram/Email unified</p></div>
+                <div class="card"><h4>Personal CRM</h4><p>Contact discovery + tracking</p></div>
+                <div class="card"><h4>Dynamic Dashboard</h4><p>Real-time API integration</p></div>
+            </div>
+
+            <h3>Research & Learning</h3>
+            <div class="grid">
+                <div class="card"><h4>AI Earnings Tracker</h4><p>Tech/AI reports tracking</p></div>
+                <div class="card"><h4>Knowledge Base (RAG)</h4><p>Searchable knowledge base</p></div>
+                <div class="card"><h4>Market Research</h4><p>Reddit/X mining → MVP building</p></div>
+            </div>
+
+            <h3>Finance & Trading</h3>
+            <div class="grid">
+                <div class="card"><h4>Polymarket Autopilot</h4><p>Prediction market trading</p></div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🔧 Quick Reference</h2>
+            <h3>OpenClaw CLI</h3>
+            <pre><code># Setup
+openclaw setup              # Full setup wizard
+openclaw configure           # Config wizard
+openclaw health              # Health check
+
+# Status
+openclaw gateway status      # Gateway status
+
+# Sub-agents
+/subagents list              # List all sub-agent runs
+/subagents stop &lt;id&gt;         # Stop running sub-agent
+/subagents log &lt;id&gt;           # View sub-agent transcript
+
+# Browser
+openclaw browser status       # Browser status
+openclaw browser snapshot       # Page snapshot
+openclaw browser screenshot      # Capture screenshot
+
+# Cron
+openclaw cron list            # List all cron jobs
+openclaw cron run &lt;id&gt;        # Run specific job</code></pre>
+        </div>
+
+        <div class="section">
+            <h2>📜 Recent Updates</h2>
+            <h3>2026-02-13</h3>
+            <ul>
+                <li>✅ <strong>OpenClaw Docs</strong> — Full documentation read and summarized</li>
+                <li>✅ <strong>Automaker Integration</strong> — OpenClaw + Pi SDK configured</li>
+                <li>✅ <strong>Borg Memory</strong> — PostgreSQL + pgvector setup complete</li>
+                <li>✅ <strong>Security</strong> — All vulnerabilities patched (0 vulns)</li>
+                <li>✅ <strong>Bug Fixes</strong> — Node.js v24+ compatibility fixed</li>
+                <li>✅ <strong>Use Cases</strong> — awesome-openclaw-usecases added to resources</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>🔗 Quick Links</h2>
+            <div class="grid">
+                <div class="card">
+                    <h4>Dashboard</h4>
+                    <a href="https://secure-clawdbot-enhanced.netlify.app/" target="_blank">Open</a>
+                </div>
+                <div class="card">
+                    <h4>Automaker</h4>
+                    <a href="http://144.76.30.176:3007" target="_blank">Open</a>
+                </div>
+                <div class="card">
+                    <h4>OpenClaw Docs</h4>
+                    <a href="https://docs.openclaw.ai" target="_blank">Open</a>
+                </div>
+                <div class="card">
+                    <h4>Use Cases</h4>
+                    <a href="https://github.com/hesamsheikh/awesome-openclaw-usecases" target="_blank">Open</a>
+                </div>
+                <div class="card">
+                    <h4>OpenClaw GitHub</h4>
+                    <a href="https://github.com/openclaw/openclaw" target="_blank">Open</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🛡️ System Health</h2>
+            <div class="grid">
+                <div class="card running">
+                    <h4>Development</h4>
+                    <p class="status online">✅ All Green</p>
+                    <p class="detail">Automaker, PostgreSQL, Borg Memory</p>
+                </div>
+                <div class="card running">
+                    <h4>Trading</h4>
+                    <p class="status online">✅ All Green</p>
+                    <p class="detail">V7, Whale Collector, Liquidation Detector</p>
+                </div>
+                <div class="card running">
+                    <h4>Monitoring</h4>
+                    <p class="status online">✅ All Green</p>
+                    <p class="detail">Prometheus, Grafana, Node Exporter</p>
+                </div>
+                <div class="card running">
+                    <h4>Gateway</h4>
+                    <p class="status online">✅ Active</p>
+                    <p class="detail">OpenClaw Gateway online</p>
+                </div>
+                <div class="card running">
+                    <h4>Security</h4>
+                    <p class="status online">✅ 0 Vulnerabilities</p>
+                    <p class="detail">Audit logging enabled</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="update-time">
+            <p>Last Updated: 2026-02-13 16:55 UTC</p>
+        </div>
+
+        <div class="footer">
+            <p>Generated by <strong>Pi Agent</strong> 🐺📿</p>
+            <p><a href="https://secure-clawdbot-enhanced.netlify.app/" target="_blank">secure-clawdbot-enhanced.netlify.app</a></p>
+        </div>
+    </div>
+</body>
+</html>

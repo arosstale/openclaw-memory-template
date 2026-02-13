@@ -1,0 +1,8 @@
+{
+  "name": "clawdbot-dashboard",
+  "version": "1.0.0",
+  "description": "Clawdbot System Status Dashboard",
+  "scripts": {
+    "deploy": "vercel --prod"
+  }
+}
