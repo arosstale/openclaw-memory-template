@@ -10,7 +10,7 @@
 
 <os>Ubuntu 24.04 LTS</os>
 <openclaw_version>2026.2.13</openclaw_version>
-<template_version>V2.6</template_version>
+<template_version>V3.1</template_version>
 <workspace>~/pi-mono-workspace</workspace>
 <shell>bash</shell>
 <shell_version>5.1.16</shell_version>
@@ -251,6 +251,71 @@
 <!-- Repeat as needed -->
 
 </important_dates>
+
+---
+
+## <emotional_resonance>
+
+<!-- This section tracks the "why" behind events, not just the "what"
+     Philosophy: Memory is emotional resonance, not just data storage
+     Usage: When documenting events, include significance and sentiment -->
+
+<memory_entry id="M001">
+  <timestamp>2026-02-15T14:00:00Z</timestamp>
+  <event>Refactored auth middleware module</event>
+  <description>Extracted JWT validation logic into separate service</description>
+  
+  <significance>
+    <level>high</level>
+    <reason>Resolved a recurring friction point that was frustrating developer</reason>
+    <category>process_improvement</category>
+  </significance>
+  
+  <sentiment>
+    <mood>relief</mood>
+    <confidence>0.90</confidence>
+    <stability_gain>high</stability_gain>
+  </sentiment>
+  
+  <impact>
+    <type>friction_reduction</type>
+    <magnitude>0.85</magnitude>
+    <area>authentication</area>
+  </impact>
+</memory_entry>
+
+<memory_entry id="M002">
+  <timestamp>2026-02-14T09:30:00Z</timestamp>
+  <event>Implemented rate limiting for API</event>
+  <description>Added Redis-based rate limiter to all endpoints</description>
+  
+  <significance>
+    <level>medium</level>
+    <reason>Completed security requirement before deadline</reason>
+    <category>security</category>
+  </significance>
+  
+  <sentiment>
+    <mood>accomplishment</mood>
+    <confidence>0.85</confidence>
+    <stability_gain>medium</stability_gain>
+  </sentiment>
+  
+  <impact>
+    <type>security_enhancement</type>
+    <magnitude>0.70</magnitude>
+    <area>api</area>
+  </impact>
+</memory_entry>
+
+<!-- Repeat memory_entry blocks for significant events
+     Fields:
+       - significance.level: low | medium | high | critical
+       - sentiment.mood: relief | accomplishment | concern | frustration | calm
+       - impact.type: friction_reduction | security_enhancement | learning | etc.
+       - impact.magnitude: 0.0-1.0 scale -->
+
+</emotional_resonance>
 
 ---
 
