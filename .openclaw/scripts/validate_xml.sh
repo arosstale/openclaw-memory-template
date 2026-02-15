@@ -1,7 +1,6 @@
 #!/bin/bash
 # validate_xml.sh - Automated ID uniqueness and XML validation
-# Purpose: Prevent duplicate IDs and malformed XML in memory files
-# Usage: ./validate_xml.sh [file_path] or runs on all XML files
+# G006 IMPLEMENTED: Metadata validation for FOR_THE_FUTURE.md
 
 set -e
 
@@ -19,7 +18,7 @@ ERROR_DETAILS=()
 if [ -n "$1" ]; then
     FILES="$1"
 else
-    FILES=$(find . -name "*.md" -type f | grep -E "(MEMORY|CONSOLIDATED_WISDOM|FRICTION_POINTS|EVOLUTION|REFLECTIONS|SHARED_VALUES)" | sort)
+    FILES=$(find . -name "*.md" -type f | grep -E "(MEMORY|CONSOLIDATED_WISDOM|FRICTION_POINTS|EVOLUTION|REFLECTIONS|SHARED_VALUES|FOR_THE_FUTURE)" | sort)
 fi
 
 echo -e "${GREEN}=== OpenClaw XML Validation ===${NC}"
@@ -28,29 +27,34 @@ echo ""
 for file in $FILES; do
     echo -e "${YELLOW}Validating: $file${NC}"
     
-    # Extract all IDs from the file
+    # Extract all IDs from: file (before duplicate check)
     WISDOM_IDS=$(grep -oE 'id="W[0-9]{3}"' "$file" | sed 's/id="//g' || true)
     FRICTION_IDS=$(grep -oE 'id="F[0-9]{3}"' "$file" | sed 's/id="//g' || true)
-    GOAL_IDS=$(grep -oE 'id="G[0-9]{3}"' "$file" | sed 's/id="//g' || true)
+    # Extract goal IDs specifically for this file
+    if [[ "$file" == *"FOR_THE_FUTURE.md"* ]]; then
+        mapfile -t GOAL_IDS < <(grep -oE 'id="G[0-9]{3}"' "$file" | sed 's/id="//g')
+    else
+        GOAL_IDS=""
+    fi
     REFLECTION_IDS=$(grep -oE 'id="R[0-9]{3}"' "$file" | sed 's/id="//g' || true)
     
     # Check for duplicates within each type
     for prefix in "W" "F" "G" "R"; do
         case $prefix in
             W)
-                IDS=($WISDOM_IDS)
+                IDS=("${WISDOM_IDS[@]}")
                 TYPE="wisdom"
                 ;;
             F)
-                IDS=($FRICTION_IDS)
+                IDS=("${FRICTION_IDS[@]}")
                 TYPE="friction"
                 ;;
             G)
-                IDS=($GOAL_IDS)
+                IDS=("${GOAL_IDS[@]}")
                 TYPE="goal"
                 ;;
             R)
-                IDS=($REFLECTION_IDS)
+                IDS=("${REFLECTION_IDS[@]}")
                 TYPE="reflection"
                 ;;
         esac
@@ -86,6 +90,22 @@ for file in $FILES; do
         ERROR_DETAILS+=("$file: Unclosed XML tags (opening: $OPEN_TAGS, closing: $CLOSE_TAGS), check around line $LINE_NUM")
         echo -e "  ${RED}✗ Unclosed XML tags in $file${NC}"
         echo -e "    Opening tags: $OPEN_TAGS, Closing tags: $CLOSE_TAGS"
+    fi
+    
+    # G006: Metadata validation for FOR_THE_FUTURE.md
+    # Check if actual goal count matches metadata active_goals count
+    if [[ "$file" == *"FOR_THE_FUTURE.md"* ]]; then
+        GOAL_COUNT=${#GOAL_IDS[@]}
+        # Extract active_goals count from metadata section (opening tag only)
+        METADATA_GOALS=$(grep -oE '<active_goals>[0-9]+' "$file" | head -1 | grep -oE '[0-9]+' | head -1)
+        
+        if [ "$GOAL_COUNT" != "$METADATA_GOALS" ]; then
+            ERRORS_FOUND=$((ERRORS_FOUND + 1))
+            METADATA_LINE=$(grep -n '<active_goals>' "$file" | cut -d: -f1)
+            ERROR_DETAILS+=("$file: Metadata drift - Found $GOAL_COUNT goals but active_goals=$METADATA_GOALS at line $METADATA_LINE")
+            echo -e "  ${RED}✗ Metadata drift in $file${NC}"
+            echo -e "    Actual goals: $GOAL_COUNT, Metadata says: $METADATA_GOALS"
+        fi
     fi
 done
 
