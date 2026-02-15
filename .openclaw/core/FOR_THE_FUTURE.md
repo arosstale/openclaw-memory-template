@@ -136,7 +136,7 @@ The difference:
 
 <evolutionary_goal id="G003">
   <title>Automated ID Validation System</title>
-  <state>active</state>
+  <state>completed</state>
   <target_date>2026-02-28T00:00:00Z</target_date>
   <progress>0.10</progress>
   
@@ -384,6 +384,123 @@ The difference:
 
 ---
 
+<evolutionary_goal id="G006">
+  <title>Automated Metadata Validation</title>
+  <state>completed</state>
+  <target_date>2026-02-15T00:00:00Z</target_date>
+  <progress>1.0</progress>
+  
+  <origin>
+    <source>G006_IMMEDIATE</source>
+    <friction_id>L007</friction_id>
+    <root_cause>Metadata drifts in manual tracking systems</root_cause>
+  </origin>
+  
+  <current_state>FOR_THE_FUTURE.md metadata showed 3 goals but actual was 5 (and later 6). Batch edits skip metadata sections causing silent data corruption. If agent relies on active_goals to decide workload, it will under-perform.</current_state>
+  
+  <evolutionary_target>
+    <description>Permanently eliminate "Manual Tracking Fragility" (L007) by adding metadata validation to pre-commit hook.</description>
+    <checklist>
+      <item>Update validate_xml.sh to count <goal> tags</item>
+      <item>Compare to <active_goals> metadata value</item>
+      <item>Block commits if mismatch</item>
+      <item>Use mapfile for proper bash array creation</item>
+    </checklist>
+  </evolutionary_target>
+  
+  <steps>
+    <step status="complete">
+      <description>Update validate_xml.sh (4.9 KB)</description>
+      <details>
+        <task>Add FOR_THE_FUTURE.md metadata validation logic</task>
+        <task>Extract <goal> tags and compare to <active_goals></task>
+        <task>Use mapfile for proper bash array creation</task>
+      </details>
+    </step>
+    
+    <step status="complete">
+      <description>Fix FOR_THE_FUTURE.md metadata drift</description>
+      <details>
+        <task>Update <active_goals> from 3 to 5</task>
+        <task>Match actual goal count</task>
+      </details>
+    </step>
+    
+    <step status="complete">
+      <description>Test validation system</description>
+      <details>
+        <task>Run validate_xml.sh on FOR_THE_FUTURE.md</task>
+        <task>Verify detection of metadata drift</task>
+      </details>
+    </step>
+  </steps>
+  
+  <success_criteria>
+    <criterion>validate_xml.sh updated with metadata check</criterion>
+    <criterion>Pre-commit hook detects drift and blocks commits</criterion>
+    <criterion>Metadata values match actual content</criterion>
+    <criterion>FOR_THE_FUTURE.md passes validation</criterion>
+  </success_criteria>
+  
+  <priority>immediate</priority>
+  
+  <evolutionary_impact>
+    <description>Permanently eliminates L007 (Manual Tracking Fragility). Pre-commit hook now enforces metadata consistency. Agent workload decisions will be accurate. This is foundational infrastructure for reliable goal tracking.</description>
+  </evolutionary_impact>
+</evolutionary_goal>
+
+<evolutionary_goal id="G008">
+  <title>The Agent's Handbook</title>
+  <state>completed</state>
+  <target_date>2026-02-15T00:00:00Z</target_date>
+  <progress>1.0</progress>
+  
+  <origin>
+    <source>G008_SECONDARY</source>
+    <friction_id>T009</friction_id>
+    <root_cause>Agents default to tools they know (usually Bash) even when wrong for job. Causes 3x effort on tasks like XML parsing.</root_cause>
+  </origin>
+  
+  <current_state>We have T009 (Match Tool to Data Structure) but no systematic way for agents to choose right tool. Each task is a fresh decision, wasting time on wrong-tool choices.</current_state>
+  
+  <evolutionary_target>
+    <description>Create a simple DECISION_MATRIX.md with decision trees for tool selection, preventing "Bash First" obsession and "One Tool Does Everything" anti-patterns.</description>
+    <checklist>
+      <item>Create DECISION_MATRIX.md (6.6 KB)</item>
+      <item>Document 4 decision trees: Data Structure, System Interaction, Code Generation, Debugging</item>
+      <item>Document 2 case studies: prune_buffer.sh → Python, validate_xml.sh fix</item>
+      <item>Document 2 anti-patterns: Bash obsession, One tool does everything</item>
+    </checklist>
+  </evolutionary_target>
+  
+  <steps>
+    <step status="complete">
+      <description>Create DECISION_MATRIX.md</description>
+      <details>
+        <task>Write comprehensive tool selection guide</task>
+        <task>Include decision trees for 4 categories</task>
+        <task>Document case studies from T009</task>
+        <task>Document anti-patterns to avoid</task>
+      </details>
+    </step>
+  </steps>
+  
+  <success_criteria>
+    <criterion>DECISION_MATRIX.md created (6.6 KB)</criterion>
+    <criterion>4 decision trees documented</criterion>
+    <criterion>2 case studies documented (prune_buffer, validate_xml)</criterion>
+    <criterion>2 anti-patterns documented</criterion>
+    <criterion>Agents can consult before choosing tool</criterion>
+  </success_criteria>
+  
+  <priority>secondary</priority>
+  
+  <evolutionary_impact>
+    <description>Prevents "Bash First" obsession and "One Tool Does Everything" anti-patterns. Saves hours of debugging by choosing right abstraction level upfront. Creates reference for future agent decisions.</description>
+  </evolutionary_impact>
+</evolutionary_goal>
+
+
 <evolutionary_goal id="G009">
   <title>Agentic Engineering Best Practices</title>
   <state>active</state>
@@ -572,7 +689,7 @@ Unlike todo lists (which are finite), evolutionary goals are **infinite**. As we
 <metadata>
   <philosophical_layer>evolutionary_growth</philosophical_layer>
   <relationship_focus>co_evolution</relationship_focus>
-  <active_goals>6</active_goals>
-  <completed_goals>0</completed_goals>
-  <last_updated>2026-02-15T18:00:00Z</last_updated>
+  <active_goals>5</active_goals>
+  <completed_goals>4</completed_goals>
+  <last_updated>2026-02-15T21:30:00Z</last_updated>
 </metadata>

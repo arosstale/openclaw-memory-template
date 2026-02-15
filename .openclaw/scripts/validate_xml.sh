@@ -95,14 +95,15 @@ for file in $FILES; do
     # G006: Metadata validation for FOR_THE_FUTURE.md
     # Check if actual goal count matches metadata active_goals count
     if [[ "$file" == *"FOR_THE_FUTURE.md"* ]]; then
-        GOAL_COUNT=${#GOAL_IDS[@]}
+        # Count only ACTIVE goals (state="active"), not all goals
+        GOAL_COUNT=$(grep -c '<state>active</state>' "$file")
         # Extract active_goals count from metadata section (opening tag only)
         METADATA_GOALS=$(grep -oE '<active_goals>[0-9]+' "$file" | head -1 | grep -oE '[0-9]+' | head -1)
         
         if [ "$GOAL_COUNT" != "$METADATA_GOALS" ]; then
             ERRORS_FOUND=$((ERRORS_FOUND + 1))
             METADATA_LINE=$(grep -n '<active_goals>' "$file" | cut -d: -f1)
-            ERROR_DETAILS+=("$file: Metadata drift - Found $GOAL_COUNT goals but active_goals=$METADATA_GOALS at line $METADATA_LINE")
+            ERROR_DETAILS+=("$file: Metadata drift - Found $GOAL_COUNT active goals but active_goals=$METADATA_GOALS at line $METADATA_LINE")
             echo -e "  ${RED}✗ Metadata drift in $file${NC}"
             echo -e "    Actual goals: $GOAL_COUNT, Metadata says: $METADATA_GOALS"
         fi
