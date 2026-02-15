@@ -573,12 +573,194 @@ Agent: "The wisdom from [W001] suggests X.
 
 ---
 
+<project_truth id="W005">
+  <title>Bio-Inspired Memory Validated by Research</title>
+  <confidence>0.97</confidence>
+  <domain>agentic_architecture</domain>
+  <date>2026-02-15T17:15:00Z</date>
+  
+  <source>
+    <origin>research_engine</origin>
+    <paper>The Pensieve Paradigm: Stateful Language Models Mastering Their Own Context</paper>
+    <paper_id>7ad9063ea61a19ee</paper_id>
+    <domain>philosophy</domain>
+  </source>
+  
+  <truth>
+    Research paper "The Pensieve Paradigm" validates our V3.0 Bio-Inspired Ecosystem: stateful LLMs with agency over their own memory (the "wand") rather than passive ingestion. This confirms BUFFER.md + MEMORY.md + PHEROMONES.md + EVOLUTION.md is sound architecture.
+  </truth>
+  
+  <application>
+    When building agentic memory systems, don't just store—give agency: query, filter, consolidate, signal. Decay short-term, persist long-term, stigmergic signaling.
+  </application>
+  
+  <related_fiction_points>
+    <friction_id>F001</friction_id>
+  </related_fiction_points>
+  
+  <evolutionary_impact>
+    <description>Strong external validation that bio-inspired memory architecture is the right direction for stateful AI systems.</description>
+  </evolutionary_impact>
+</project_truth>
+
+<technical_truth id="T008">
+  <title>SLMs + External Memory = Sustainable AI Economics</title>
+  <confidence>0.98</confidence>
+  <domain>agentic_systems</domain>
+  <date>2026-02-15T17:15:00Z</date>
+  
+  <source>
+    <origin>research_engine</origin>
+    <paper>LaCy: Small Language Models Can and Should Learn</paper>
+    <paper_id>af07cda3a52dacf3</paper_id>
+    <domain>philosophy</domain>
+  </source>
+  
+  <truth>
+    Research validates Eastern Dragon stack: SLMs with external memory (larger models, docs, DBs) provide same capability at lower cost, better latency, more predictability than massive LLMs. Our $234/year savings with zero capability loss is proof.
+  </truth>
+  
+  <application>
+    Consider SLM + external memory instead of massive LLMs. Eastern Dragon pattern: GLM-4.7 (router) + MiniMax M2.5 (engineer) + Kimi K2.5 (librarian). Same capability, lower cost, better latency.
+  </application>
+  
+  <related_fiction_points>
+    <friction_id>F003</friction_id>
+  </related_fiction_points>
+  
+  <evolutionary_impact>
+    <description>Confirms zero-cost stack is sound architecture. Prevents "bigger model" bias and enables sustainable AI economics.</description>
+  </evolutionary_impact>
+</technical_truth>
+
+<life_lesson id="L006">
+  <title>LLMs Need Explicit Feedback for Theory of Mind</title>
+  <confidence>0.97</confidence>
+  <domain>human_ai_interaction</domain>
+  <date>2026-02-15T17:15:00Z</date>
+  
+  <source>
+    <origin>research_engine</origin>
+    <paper>GPT-4o Lacks Theory of Mind</paper>
+    <paper_id>adec0fb94e23643a</paper_id>
+    <domain>philosophy</domain>
+  </source>
+  
+  <lesson>
+    LLMs lack actual ToM (causal mental model), they just pattern-match. This explains why V3.1 REFLECTIONS.md and MIRRORING PROFILE are necessary—explicit feedback loops are the only way LLMs can build a "causal model" of human.
+  </lesson>
+  
+  <application>
+    Build explicit feedback loops: REFLECTIONS.md, MIRRORING PROFILE, FRICTION_POINTS.md. Don't assume understanding—tell agent explicitly: "concise technical", "don't interrupt", "batch tasks".
+  </application>
+  
+  <related_fiction_points>
+    <friction_id>F002</friction_id>
+  </related_fiction_points>
+  
+  <evolutionary_impact>
+    <description>Explains why V3.1 Cognitive Partnership system is necessary. Without explicit mirroring, LLMs never truly understand their human.</description>
+  </evolutionary_impact>
+</life_lesson>
+
+<technical_truth id="T009">
+  <title>Match Tool to Data Structure</title>
+  <confidence>0.99</confidence>
+  <domain>implementation</domain>
+  <date>2026-02-15T17:30:00Z</date>
+  
+  <source>
+    <origin>prune_buffer_migration</origin>
+    <pattern>bash_regex(3 fails) → python_parser(1 success)</pattern>
+  </source>
+  
+  <truth>
+    prune_buffer.sh experience: tried 3 times to parse XML with bash regex, failed. Migrated to Python with proper XML parsing, worked immediately. Lesson: choose tool that matches data structure (XML/JSON → Python, text → Bash).
+  </truth>
+  
+  <application>
+    Tool selection heuristic: structured data → Python modules (json, xml, yaml), line-based text → Bash (awk, sed, grep), system interaction → Bash. When in doubt, start with Python for structured data.
+  </application>
+  
+  <related_fiction_points>
+    <friction_id>none</friction_id>
+  </related_fiction_points>
+  
+  <evolutionary_impact>
+    <description>Prevents "tool obsession" (bash for everything). Saves hours by choosing right abstraction level upfront.</description>
+  </evolutionary_impact>
+</technical_truth>
+
+<life_lesson id="L007">
+  <title>Metadata Drifts in Manual Tracking Systems</title>
+  <confidence>0.96</confidence>
+  <domain>system_reliability</domain>
+  <date>2026-02-15T17:30:00Z</date>
+  
+  <source>
+    <origin>FOR_THE_FUTURE.md_metadata</origin>
+    <pattern>active_goals count mismatch (added 2 goals, metadata still showed 3)</pattern>
+  </source>
+  
+  <lesson>
+    Manual tracking (counts, totals, versions) drifts naturally. F004 experience wasn't just IDs—metadata synchronization failed in batch edits. Prevention: pre-commit hooks, summary checks, automated validation.
+  </lesson>
+  
+  <application>
+    Pre-flight for batch ops: 1) Identify all metadata sections, 2) Update counts/totals in one pass, 3) Use validation. Example: "Adding 2 goals" → check active_goals count, avg_progress, last_updated.
+  </application>
+  
+  <related_fiction_points>
+    <friction_id>F004</friction_id>
+  </related_fiction_points>
+  
+  <evolutionary_impact>
+    <description>Explains need for G003 (ID validation) + automated metadata validation. Metadata drifts silently.</description>
+  </evolutionary_impact>
+</life_lesson>
+
+<technical_truth id="T010">
+  <title>Ghost Limb Detection: System Necrosis Pattern</title>
+  <confidence>0.95</confidence>
+  <domain>system_health</domain>
+  <date>2026-02-15T17:30:00Z</date>
+  
+  <source>
+    <origin>research_engine_regeneration</origin>
+    <pattern>dead_pid + cron_failure + missing_script (3 days necrosis)</pattern>
+  </source>
+  
+  <truth>
+    Ghost limbs: components die silently but appear alive (pid file exists, process dead). Research engine was dead 3+ days before detection. Prevention: PID validation (ps -p), output validation (log timestamps), dependency check (scripts exist).
+  </truth>
+  
+  <application>
+    Health monitoring: PID validation, output validation, dependency checks. Recovery: 1) Detect, 2) Regenerate, 3) Vascularize (update cron, test), 4) Verify.
+  </application>
+  
+  <related_fiction_points>
+    <friction_id>none</friction_id>
+  </related_fiction_points>
+  
+  <evolutionary_impact>
+    <description>Validates "digital nervous system" metaphor. Systems need health monitoring, not just placement. Detection requires looking beneath surface.</description>
+  </evolutionary_impact>
+</technical_truth>
+
+---
+
 <metadata>
   <philosophical_layer>co_processor</philosophical_layer>
   <relationship_focus>wisdom_distillation</relationship_focus>
   <mind_extension>true</mind_extension>
   <biomimetic>true</biomimetic>
   <categories>project_truths,life_lessons,technical_truths,temporal_insights</categories>
-  <avg_confidence>0.93</avg_confidence>
-  <last_updated>[ISO-8601]</last_updated>
+  <avg_confidence>0.96</avg_confidence>
+  <total_wisdom_entries>18</total_wisdom_entries>
+  <last_updated>2026-02-15T17:30:00Z</last_updated>
 </metadata>
+
+
+---
+
+<metadata>
