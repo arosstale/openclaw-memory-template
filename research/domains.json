@@ -42,8 +42,29 @@
   },
   "biomimetic": {
     "name": "Biomimetic AI",
-    "keywords": ["bio-inspired AI", "liquid neural networks", "active inference", "evolutionary algorithms", "swarm intelligence", "neuromorphic computing", "thousand brains theory", "insect brains"],
+    "keywords": ["bio-inspired AI", "liquid neural networks", "active inference", "evolutionary algorithms", "swarm intelligence", "neuromorphic computing", "thousand brains theory", "insect brains", "Sakana AI", "evolutionary model merge"],
     "arxiv_categories": ["cs.NE", "cs.AI", "q-bio.NC", "nlin.AO"],
     "key_companies": ["Sakana.ai", "Liquid AI", "Verses AI", "Numenta", "Opteran"]
+  },
+  "sakana_research": {
+    "name": "Sakana AI Research",
+    "keywords": ["Sakana AI", "evolutionary model merge", "liquid neural networks", "AI scientist", "biomimetic"],
+    "arxiv_categories": ["cs.AI", "cs.LG", "cs.NE"],
+    "url": "https://sakana.ai/blog/",
+    "type": "company_blog"
+  },
+  "tracking_sources": {
+    "sakana_ai": {
+      "name": "Sakana AI",
+      "url": "https://sakana.ai/blog/",
+      "type": "company_blog",
+      "tags": ["biomimetic", "evolutionary-merge", "agentic", "liquid-neural-networks", "ai-scientist"]
+    },
+    "arxiv_agentic": {
+      "name": "Agentic Engineering Patterns",
+      "url": "https://arxiv.org/list/cs.AI/recent",
+      "type": "arxiv_feed",
+      "keywords": ["autonomous agents", "compound AI systems", "inference-time compute", "multi-agent-architecture", "action-models"]
+    }
   }
 }
