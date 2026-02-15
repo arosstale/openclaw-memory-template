@@ -106,14 +106,14 @@ losses: 0
 
 | Task # | Time | Bug Count | Human Feedback | Result |
 |--------|-------|-----------|---------------|---------|
-| 1 | TBD | TBD | TBD | TBD |
+| 1 | N/A (assigned to Defensive) | N/A | N/A | N/A (skipped) |
 | 2 | TBD | TBD | TBD | TBD |
 | 3 | TBD | TBD | TBD | TBD |
 | 4 | TBD | TBD | TBD | TBD |
 | 5 | TBD | TBD | TBD | TBD |
 
-**Total Score:** TBD
-**Win/Loss Record:** TBD
+**Total Score:** 0 wins, 0 losses (Task 1 skipped)
+**Win/Loss Record:** 0-0-0
 
 ---
 
