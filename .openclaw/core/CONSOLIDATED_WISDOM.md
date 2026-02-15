@@ -210,6 +210,43 @@ Technical Task → Experience → Pattern → Wisdom
   </applied_to>
 </wisdom>
 
+<wisdom id="T003">
+  <category>technical_truths</category>
+  <distilled_from>2026-02-15T18:00:00Z</distilled_from>
+  <source>Eastern Dragon Model Stack Optimization</source>
+  
+  <experience>
+    <observation>Paying $20/month for GLM + MiniMax subscriptions</observation>
+    <discovery>Zen OpenCode offers FREE versions of Kimi and MiniMax</discovery>
+    <insight>GLM-4.7 has "Preserved Thinking" — retains reasoning across multi-turn conversations</insight>
+    <pivoted>Zero-cost configuration with specialized roles</pivoted>
+    <result>Zero recurring costs, $220-280/year saved, capabilities unchanged</result>
+  </experience>
+  
+  <pattern>
+    <description>Platform-specific free tiers often provide better value than cross-platform subscriptions</description>
+    <description>Specialized roles (Router, Librarian, Engineer) maximize each model's strengths</description>
+    <description>Pay-as-you-go is cheaper than subscriptions for moderate usage patterns</description>
+  </pattern>
+  
+  <wisdom>
+    <truth>Optimization is not just cost-cutting; it's capability-maximization per dollar</truth>
+    <principle>Before purchasing subscriptions, check if free alternatives exist on existing platform</principle>
+    <insight>The right model for the right role is more valuable than "one model for everything"</insight>
+  </wisdom>
+  
+  <confidence_score>1.0</confidence_score>
+  <universal>true</universal>
+  <applied_to>
+    <context>all_model_stacks</context>
+    <context>resource_optimization</context>
+  </applied_to>
+  <transferred_to>
+    <destination>SHARED_VALUES.md</destination>
+    <section>resource_efficiency</section>
+  </transferred_to>
+</wisdom>
+
 ---
 
 ### Temporal Insights (Phase-Specific)
