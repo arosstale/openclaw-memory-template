@@ -113,7 +113,7 @@ check_status() {
     echo "Papers by Domain:"
     for domain in "$RESEARCH_DIR/papers"/*; do
         if [[ -d "$domain" ]]; then
-            count=$(find "$domain" -name "*.txt" 2>/dev/null | wc -l)
+            count=$(find "$domain" -name "*.md" 2>/dev/null | wc -l)
             domain_name=$(basename "$domain")
             echo "  $domain_name: $count"
         fi
@@ -185,7 +185,7 @@ run_daily_research() {
     # Update status
     local total_papers=$(find "$RESEARCH_DIR/papers" -name "*.txt" 2>/dev/null | wc -l)
     jq --arg date "$(date -Iseconds)" --argjson total "$total_papers" \
-        '.last_run = $date | .papers_total = $total_particles | .status = "completed"' \
+        '.last_run = $date | .papers_total = $total | .status = "completed"' \
         "$STATUS_FILE" > "${STATUS_FILE}.tmp" && mv "${STATUS_FILE}.tmp" "$STATUS_FILE"
 
     log "Daily research cycle complete!"
