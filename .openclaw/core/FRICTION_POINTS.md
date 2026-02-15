@@ -152,7 +152,7 @@ In human-AI collaboration, **friction points** are the same thing:
 
 ### Friction F004 - [2026-02-13T16:45:00Z]
 
-<friction_point id="F003">
+<friction_point id="F004">
   <type>Value Misalignment</type>
   <severity>high</severity>
   
