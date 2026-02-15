@@ -319,6 +319,42 @@
 
 ---
 
+## <evolutionary_history>
+
+<!-- Tracks CODER_V2 evolution and tournament results -->
+
+<evolutionary_event>
+  <timestamp>2026-02-15T20:00:00Z</timestamp>
+  <type>offspring_born</type>
+  <description>CODER_V2 created via Darwinian tournament (Round 1)</description>
+  <parents>
+    <parent>coder_aggressive.md</parent>
+    <parent>coder_defensive.md</parent>
+  </parents>
+  <strategy>context_aware_polymorphism</strategy>
+  <trait_inheritance>
+    <from_parent speed="high">Aggressive (velocity, standard libs, minimal output)</from_parent>
+    <from_parent robustness="high">Defensive (validation, atomic changes, verbose explanations)</from_parent>
+  </trait_inheritance>
+</evolutionary_event>
+
+<evolutionary_event>
+  <timestamp>2026-02-15T20:00:00Z</timestamp>
+  <type>tournament_complete</type>
+  <description>Split-Test Round 1: 5 tasks executed</description>
+  <results>
+    <variant name="Aggressive" wins="2" tasks="rapid_prototyping, utility_scripts" />
+    <variant name="Defensive" wins="3" tasks="critical_infrastructure, metadata_validation" />
+  </results>
+  <winner>CODER_V2 (context-aware chimera)</winner>
+</evolutionary_event>
+
+<!-- Add new evolutionary events above this line -->
+
+</evolutionary_history>
+
+---
+
 ## <last_updated>
 <timestamp>INSERT_ISO_8601_TIMESTAMP</timestamp>
 <session_id>INSERT_SESSION_ID</session_id>
