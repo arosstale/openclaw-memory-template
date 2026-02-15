@@ -16,7 +16,7 @@
   
   <version>
     <openclaw>2026.2.13</openclaw>
-    <template>V2.6</template>
+    <template>V3.0</template>
     <last_updated>[ISO-8601 Timestamp]</last_updated>
   </version>
   
@@ -151,6 +151,44 @@
       <action>Move to ARCHIVE.md, update metadata</action>
     </archive_trigger>
   </memory_strategy>
+
+  <bio_inspired_memory>
+    <stigmergy>
+      <enabled>true</enabled>
+      <file>PHEROMONES.md</file>
+      <rule>Leave contextual markers when starting tasks</rule>
+      <rule>Follow existing trails when available</rule>
+      <rule>Reinforce trails when making progress (+0.1)</rule>
+      <rule>Evaporate trails after 48h without activity</rule>
+    </stigmergy>
+    
+    <dual_layer>
+      <enabled>true</enabled>
+      <buffer>BUFFER.md</buffer>
+      <long_term>MEMORY.md</long_term>
+      <decay_policy>7_days</decay_policy>
+      <elevation_criteria>high_entropy, novel, user_flagged, frequent</elevation_criteria>
+    </dual_layer>
+    
+    <evolution>
+      <enabled>true</enabled>
+      <file>EVOLUTION.md</file>
+      <trigger>task_attempts > 3</trigger>
+      <trigger>user_frustration_detected</trigger>
+      <trigger>same_error_repeated > 2</trigger>
+      <rule>Update EVOLUTION.md with learned patterns</rule>
+      <rule>Memory is instruction set, not just history</rule>
+    </evolution>
+    
+    <mycelium>
+      <enabled>true</enabled>
+      <pattern>semantic_tags</pattern>
+      <file>PROJECT_TEMPLATE_V3.md</file>
+      <rule>Add YAML headers with tags to all projects</rule>
+      <rule>Link related projects via semantic tags</rule>
+      <rule>Pull ancestral knowledge from linked projects</rule>
+    </mycelium>
+  </bio_inspired_memory>
   
   <learning_patterns>
     <self_improvement>
