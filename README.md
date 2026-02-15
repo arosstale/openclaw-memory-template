@@ -6,332 +6,233 @@
 
 > **📌 Note**: This is a **community memory template** for OpenClaw. It contains OpenClaw core components, configuration files, and community skills. It does **not** contain proprietary trading agent code.
 
+### 📚 Research Engine (NEW)
+Automated paper discovery & summarization across 7 domains (Trading, AI, Cognitive Science, Philosophy, Math, CS, Physics). Your agent stays ahead of the latest research without manual curation.
+
 ---
 
-## Quick Start
+## 📁 Architecture
+
+```
+.openclaw/
+├── core/              # Identity, Soul, Rules (The Agent)
+│   ├── IDENTITY.md
+│   ├── SOUL.md
+│   ├── AGENTS.md
+│   ├── USER.md
+│   ├── TOOLS.md
+│   └── HEARTBEAT.md
+│
+├── context/           # External Knowledge (The Index)
+│   └── LINKS.md
+│
+├── scripts/           # Automation (The Nervous System)
+│   ├── init.sh        # Bootstrap
+│   ├── sync.sh        # Git sync with notes
+│   ├── log.sh         # Daily logging
+│   ├── status.sh      # Health check
+│   ├── fix-thermal-monitor.sh  # Diagnostics
+│   └── research.sh   # **NEW** Paper discovery
+│
+└── templates/         # Consistency
+    ├── daily-log.md
+    └── project.md
+
+memory/
+├── .git/              # The Brain (Git-backed)
+├── daily/             # Daily logs
+├── projects/          # Project notes
+├── .gitignore         # Prevents conflicts
+└── index.md           # Central index
+
+research/              # **NEW** Academic Research
+├── papers/            # Downloaded papers by domain
+├── summaries/         # AI-generated summaries
+├── daily/             # Daily research reports
+├── keywords/          # Keyword expansions
+├── domains.json       # Domain configuration
+└── status.json        # Engine status
+```
+
+---
+
+## 🎯 Quick Start
 
 ```bash
 # 1. Clone this repository
 git clone https://github.com/arosstale/openclaw-memory-template.git
 cd openclaw-memory-template
 
-# 2. Run welcome script (recommended)
-bash scripts/welcome.sh
+# 2. Run setup
+./setup.sh ~/my-agent-workspace
 
-# 3. Initialize Observational Memory
-bash scripts/init-observational-memory.sh
+# 3. Configure Git remote
+cd ~/my-agent-workspace/memory
+git remote add origin https://github.com/YOUR_USERNAME/agent-memory
+git push -u origin main
 
-# 4. Run ALMA+PAOM self-improving demo
-python3 alma_paom_integration.py
+# 4. Customize
+.openclaw/core/IDENTITY.md   # Agent persona
+.openclaw/core/SOUL.md       # Behavior
+.openclaw/core/USER.md       # User preferences
 
-# 5. Start PostgreSQL sidecar (optional)
-docker-compose -f docker-compose.postgres.yml up -d
+# 5. Start using
+.openclaw/scripts/log.sh    # Create daily log
+# ... work ...
+.openclaw/scripts/sync.sh   # Sync to Git
 
-# 6. Run tests
-python3 test_observational_memory.py
+# 6. Research engine (NEW)
+.openclaw/scripts/research.sh init    # Initialize research
+.openclaw/scripts/research.sh run     # Run daily research
+.openclaw/scripts/research.sh status   # Check status
 ```
 
 ---
 
-## V2.5 Features
+## 🔧 Scripts
 
-### 🆕 ALMA Self-Improving Systems
-
-Based on the ALMA research paper (https://arxiv.org/pdf/2602.07755):
-
-> "Agentic systems that learn to improve all aspects of their agentic system, including their memory, learning to continually learn while solving problems in ever-changing real-world environments!"
-
-**Key Innovation**: AI systems should learn **HOW to optimize**, not just **WHAT to execute**.
-
-### Core Components
-
-| Feature | Description |
-|----------|-------------|
-| **ALMA Meta-Learning** | Automatic design discovery and optimization |
-| **Observational Memory (PAOM)** | Context compression + temporal tracking |
-| **Knowledge System** | Semantic codebase search and indexing |
-| **ALMA+PAOM Integration** | Self-improving memory system |
-| **LLM Integration** | Anthropic, OpenAI, Google support |
-| **Tiktoken** | 100% accurate token counting |
-| **CLI Tool** | Full command-line interface |
-
-### Core Features
-
-| Feature | Description |
-|----------|-------------|
-| **Zero-Knowledge Proofs** | Cryptographic task verification |
-| **Proof-Based Reputation** | Mathematically verified proofs |
-| **Swarm Protocol** | Multi-agent coordination |
-| **Dual-Core Memory** | PostgreSQL (structured) + QMD (semantic) |
-| **Hardware-Aware** | Thermal monitoring and adaptive compute |
-| **GEPA** | Self-correcting mutation engine |
-| **ALMA Self-Improvement** | Meta-learning for automatic optimization |
+| Script | Purpose | Usage |
+|--------|---------|-------|
+| `init.sh` | Bootstrap structure | `.openclaw/scripts/init.sh` |
+| `sync.sh` | Git sync with notes | `.openclaw/scripts/sync.sh` |
+| `log.sh` | Create daily log | `.openclaw/scripts/log.sh` |
+| `status.sh` | Health check | `.openclaw/scripts/status.sh` |
+| `fix-thermal-monitor.sh` | Diagnose Pi temps | `.openclaw/scripts/fix-thermal-monitor.sh` |
+| `research.sh` | **NEW** Paper discovery | `./scripts/research.sh run` |
 
 ---
 
-## Architecture
+## 📚 Research Engine (NEW)
 
-```
-┌────────────────────────────────────────────────────────────┐
-│          OpenClaw Self-Improving Memory Template        │
-├────────────────────────────────────────────────────────────┤
-│                                                        │
-│  ┌──────────────────┐  ┌──────────────┐       │
-│  │      ALMA        │  │   PAOM       │       │
-│  │  Meta-Learning  │  │  Memory       │       │
-│  │                  │  │              │       │
-│  └──────────────────┘  └──────────────┘       │
-│           │                      │               │
-│           └─────────────┬─────────┘               │
-│                         ↓                        │
-│            Self-Improving System                 │
-│                         ↓                        │
-│              Actor (Main Agent)                 │
-└────────────────────────────────────────────────────────────┘
-```
+### Automated Paper Discovery
 
----
+7 Domains:
+1. **Trading & Finance** - Quant strategies, HFT, risk management
+2. **Artificial Intelligence** - ML, DL, RL, NLP
+3. **Cognitive Science** - Memory systems, decision making
+4. **Philosophy** - Epistemology, ethics, consciousness
+5. **Mathematics** - Optimization, probability, game theory
+6. **Computer Science** - Distributed systems, crypto, databases
+7. **Physics** - Quantum computing, chaos theory
 
-## Documentation
-
-| Document | Purpose |
-|----------|----------|
-| **README.md** | Main documentation |
-| **V2.5_RELEASE_NOTES.md** | V2.5 changelog |
-| **V2.4_RELEASE_NOTES.md** | V2.4 changelog |
-| **MIGRATION_V24.md** | Migration guide from V2.3 |
-| **SELF_IMPROVING_ROADMAP.md** | 5-phase roadmap |
-| **DASHBOARD.md** | System architecture |
-| **PROTOCOL.md** | Swarm protocol |
-| **CONTRIBUTING.md** | Contribution guidelines |
-| **CHANGELOG.md** | Version history |
-
-### Component Documentation
-
-| Component | Location |
-|-----------|----------|
-| **Observational Memory** | `.openclaw/observational_memory/` |
-| **PAOM Docs** | `.openclaw/docs/OBSERVATIONAL_MEMORY.md` |
-| **PAOM API** | `.openclaw/docs/OBSERVATIONAL_MEMORY_API.md` |
-| **ALMA Agent** | `.openclaw/alma/alma_agent.py` |
-| **Unified Memory** | `.openclaw/memory/` |
-| **Zero-Knowledge Proofs** | `.openclaw/zkp/` |
-| **GEPA Evolution** | `.openclaw/evolution/` |
-
----
-
-## ALMA+PAOM Self-Improving
-
-### Quick Start
-
-```python
-from alma_paom_integration import ALMAPAOSystem
-
-# Initialize self-improving system
-system = ALMAPAOSystem()
-
-# Run meta-learning cycle
-designs = system.run_meta_learning_cycle(
-    num_iterations=5,
-    num_designs_per_iteration=3,
-)
-
-# Best design is automatically applied
-best_design = system.alma.get_best_design()
-print(f"Best design: {best_design.design_id} (score: {best_design.performance_score:.2f})")
-```
-
-### Command-Line Demo
-
+### Usage:
 ```bash
-python3 alma_paom_integration.py
+# Initialize research engine
+./scripts/research.sh init
+
+# Check status
+./scripts/research.sh status
+
+# Run daily research cycle
+./scripts/research.sh run
+
+# Search specific keywords
+./scripts/research.sh search "temporal memory, belief decay"
 ```
 
-**Output**:
-```
-🐺📿 Self-Improving Memory System Example
-============================================================
+### Features:
+- **Daily Discovery**: Queries arXiv for new papers
+- **Domain Tracking**: 7 domains with configurable keywords
+- **Status Monitoring**: JSON status with papers collected
+- **AI Summarization**: Ready for OpenAI/Claude integration
+- **Keyword Expansion**: Expand search terms per domain
 
-🚀 Initial optimization...
-
-🔄 Iteration 1/3
-🔧 Applied design parameters:
-   observation_threshold: 30000
-   reflection_threshold: 50000
-   llm_provider: google
-✅ Applied design: cd6c0e53 (score: 88.20)
-
-...
-
-🏆 Best design: cd6c0e53
-   Score: 88.20
-
-✅ Self-improving system example complete
-```
+See [RESEARCH_ENGINE.md](./RESEARCH_ENGINE.md) for complete guide.
 
 ---
 
-## Observational Memory Usage
+## 💡 Features
 
-```python
-from .openclaw.observational_memory import ObservationalMemory, ObservationConfig
-
-# Initialize
-config = ObservationConfig(
-    observation_threshold=30000,
-    reflection_threshold=40000,
-)
-om = ObservationalMemory(config)
-
-# Process messages
-messages = [
-    {"role": "user", "content": "I have 2 kids", "timestamp": datetime.now()},
-]
-record = om.process_messages("thread-123", messages)
-
-# Get context
-context = om.get_context("thread-123")
+### Clean Git History
+Commit messages are clean, with metadata in Git Notes (JSON):
+```json
+{
+  "title": "Daily Log Update",
+  "date": "2026-02-03",
+  "session_start": "2026-02-03T09:00:00",
+  "session_summary": "Completed research..."
+}
 ```
+
+### Morning Routine
+Checks automatically:
+- Security: Recent changes, suspicious activity
+- System: CPU temp, disk usage, daemon status
+- Memory: Git sync status, daily log created
+- **Research**: Check for new papers (NEW)
+
+### Self-Diagnostics
+Agent can check and fix its own thermal monitoring without human help.
+
+### Context Registry
+All external resources in `LINKS.md` — no more "where was that link?"
+
+### 📚 Research Pipeline (NEW)
+- Automated arXiv queries per domain
+- Daily research reports in Markdown
+- Paper storage with AI summarization support
+- Keyword expansion and tracking
 
 ---
 
-## CLI Tools
+## 📊 V1 vs V2
 
-### Observational Memory CLI
-
-```bash
-# Observe messages
-python scripts/observational-memory-cli.py observe <thread> -f messages.json
-
-# Get context
-python scripts/observational-memory-cli.py context <thread>
-
-# Get stats
-python scripts/observational-memory-cli.py stats <thread>
-
-# Force reflection
-python scripts/observational-memory-cli.py reflect <thread>
-
-# List threads
-python scripts/observational-memory-cli.py list
-```
+| Feature | V1 | V2 |
+|---------|-----|-----|
+| Memory | Manual files | Git-backed, versioned |
+| Git History | Mixed with AI chatter | 100% clean |
+| Automation | Basic sync | 6 production scripts |
+| Self-Awareness | Reactive | Proactive health checks |
+| Context | Lost in files | LINKS.md registry |
+| Research | Manual discovery | Automated arXiv pipeline |
+| Structure | Flat | Clear separation |
 
 ---
 
-## Testing
+## 🐺 Philosophy
 
-```bash
-# Run Observational Memory tests
-python3 test_observational_memory.py
+**Three Principles:**
 
-# Run GEPA validation
-bash scripts/gepa-test.sh
-
-# Run ZKP test suite
-bash scripts/zkp-test.sh
-```
-
-### Test Results
-
-```
-==================================================
-Results: 9 passed, 0 failed
-==================================================
-```
+1. **Minimal Core** — Few files, clear structure, agents extend via code
+2. **Self-Documenting** — Memory captures its own evolution
+3. **Terminal-Native** — CLI-first, Git-based, no GUI friction
 
 ---
 
-## Configuration
+## 📄 Documentation
 
-### Observational Memory
-
-```python
-from .openclaw.observational_memory import ObservationConfig
-
-config = ObservationConfig(
-    observation_threshold=30000,  # 30k tokens
-    reflection_threshold=40000,   # 40k tokens
-    observer_temperature=0.3,      # LLM temperature
-    reflector_temperature=0.0,      # LLM temperature
-    llm_provider="anthropic",        # LLM provider
-    use_tiktoken=True,              # Tiktoken
-    db_path=".openclaw/observational_memory.db",
-)
-```
-
-### ALMA
-
-```python
-from .openclaw.alma.alma_agent import ALMAAgent
-
-alma = ALMAAgent(db_path=".openclaw/alma_designs.db")
-```
+- [Research Engine Guide](./RESEARCH_ENGINE.md) — Automated paper discovery & summarization
+- [Advanced RAG Guide](./ADVANCED_RAG_GUIDE.md) — Memory retrieval techniques
+- [Structure](./STRUCTURE.md) — Directory structure explained
 
 ---
 
-## PostgreSQL & QMD Setup
+## 🤝 Contributing
 
-```bash
-# Start PostgreSQL
-docker-compose -f docker-compose.postgres.yml up -d
+This is a template—fork and customize!
 
-# Start QMD
-docker-compose -f docker-compose.qmd.yml up -d
-
-# Check health
-docker exec openclaw-postgres pg_isready -U openclaw -d openclaw_elite
-```
+Share your variations:
+- Custom scripts
+- Additional templates
+- Workflow improvements
+- Integration examples
 
 ---
 
-## Research Foundation
+## 📜 License
 
-### ALMA Paper
-
-- **Title**: Algorithm Learning via Meta-learning Agents
-- **Authors**: Xiong, Hu, and Clune
-- **arXiv**: https://arxiv.org/pdf/2602.07755
-- **Code**: https://github.com/zksha/alma
-- **Website**: https://yimingxiong.me/alma
-
-### Key Insight
-
-> "Agentic systems that learn to improve all aspects of their agentic system, including their memory, learning to continually learn while solving problems in ever-changing real-world environments!"
-
-### Connections to Our Systems
-
-**V7 Trading System**
-- ✅ ALMA enables meta-learning of strategy weights
-- System learns HOW to optimize, not just WHAT to execute
-
-**Tick Orchestrator**
-- ✅ ALMA enables continual learning of agent routing
-- Self-improving multi-agent coordination
-
-**RBI Research Engine**
-- ✅ ALMA-enhanced research engine
-- Continual improvement in paper discovery
+MIT — Use, modify, share freely. Attribution appreciated.
 
 ---
 
-## Support
+## 🙏 Credits
 
-- **Community**: https://discord.com/invite/clawd
-- **Documentation**: See individual `.md` files
-- **Source**: https://github.com/openclaw/openclaw
-
----
-
-## Version History
-
-| Version | Date | Changes |
-|---------|------|---------|
-| **V2.5** | 2026-02-10 | ALMA meta-learning, self-improving systems |
-| **V2.4** | 2026-02-10 | Mastra Observational Memory, test suite |
-| **V2.3** | 2026-02-01 | Zero-Knowledge Proofs, Swarm protocol |
-| **V2.2** | 2026-01-20 | Swarm Intelligence, cross-agent knowledge transfer |
-| **V1.2** | 2026-01-15 | Enhanced security, encryption, auth |
+- **Daniel Miessler** — PAI Framework inspiration
+- **Armin Ronacher** — Pi agent philosophy
+- **Mario Zechner** — Pi implementation
+- **Peter Steinberger** — OpenClaw vision
+- **Artale** — Production testing & V2 architecture
 
 ---
 
-**Version**: 2.5 ALMA Self-Improving | **Status**: 🟢 Production Ready | **Last Updated**: 2026-02-10
+**🐺 Your agent now has a self-managing brain with research pipeline. Time to build.**
