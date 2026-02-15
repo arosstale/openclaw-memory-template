@@ -33,5 +33,17 @@
     "name": "Physics",
     "keywords": ["quantum computing", "statistical mechanics", "chaos theory", "complex systems"],
     "arxiv_categories": ["quant-ph", "cond-mat", "physics.comp-ph", "nlin.AO"]
+  },
+  "agentic": {
+    "name": "Agentic Engineering",
+    "keywords": ["agentic systems", "multi-agent architecture", "compound AI", "action models", "autonomous agents", "workflow automation", "digital workers", "human-on-the-loop"],
+    "arxiv_categories": ["cs.AI", "cs.MA", "cs.LG"],
+    "key_companies": ["Sakana.ai", "Sierra", "Ema", "Imbue", "Adept"]
+  },
+  "biomimetic": {
+    "name": "Biomimetic AI",
+    "keywords": ["bio-inspired AI", "liquid neural networks", "active inference", "evolutionary algorithms", "swarm intelligence", "neuromorphic computing", "thousand brains theory", "insect brains"],
+    "arxiv_categories": ["cs.NE", "cs.AI", "q-bio.NC", "nlin.AO"],
+    "key_companies": ["Sakana.ai", "Liquid AI", "Verses AI", "Numenta", "Opteran"]
   }
 }

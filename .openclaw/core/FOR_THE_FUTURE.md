@@ -384,6 +384,93 @@ The difference:
 
 ---
 
+<evolutionary_goal id="G009">
+  <title>Agentic Engineering Best Practices</title>
+  <state>active</state>
+  <target_date>2026-03-15T00:00:00Z</target_date>
+  <progress>0.05</progress>
+  
+  <origin>
+    <source>EXTERNAL_RESEARCH</source>
+    <context>Sakana.ai, biomimetic AI cohort, agentic engineering trends</context>
+    <insight>2026 Agentic Engineering field provides validation and best practices for V3.1 architecture. Should track and integrate external research to ensure our system remains at forefront of agentic design.</insight>
+  </origin>
+  
+  <current_state>We've documented V3.1 architecture internally (bio-inspired memory, cognitive partnership, Eastern Dragon) but haven't systematically tracked external research or validated against emerging best practices from the Agentic Engineering field.</current_state>
+  
+  <evolutionary_target>
+    <description>By March 15, establish systematic external research integration:</description>
+    <checklist>
+      <item>Track Sakana.ai evolutionary model merge papers</item>
+      <item>Monitor Liquid AI liquid neural network research</item>
+      <item>Review Verses AI active inference approaches</item>
+      <item>Study Numenta Thousand Brains Theory</item>
+      <item>Map external trends to V3.1 components</item>
+      <item>Update AGENTIC_ENGINEERING.md with findings</item>
+      <item>Create wisdom entries from research insights</item>
+    </checklist>
+  </evolutionary_target>
+  
+  <steps>
+    <step status="complete">
+      <description>Create AGENTIC_ENGINEERING.md research domain</description>
+      <details>
+        <task>Document Sakana.ai evolutionary model merge</task>
+        <task>Catalog biomimetic cohort (Liquid AI, Verses, Numenta, Opteran)</task>
+        <task>Document industrial agentic startups (Sierra, Ema, Imbue, Adept)</task>
+        <task>Map key trends (compound AI, inference-time compute, bio-efficiency)</task>
+        <task>Connect external concepts to V3.1 components</task>
+      </details>
+    </step>
+    
+    <step status="pending">
+      <description>Update research domains.json</description>
+      <details>
+        <task>Add "agentic" domain (multi-agent, compound AI)</task>
+        <task>Add "biomimetic" domain (bio-inspired AI)</task>
+        <task>Include key companies for tracking</task>
+        <task>Configure Research Engine to monitor</task>
+      </details>
+    </step>
+    
+    <step status="pending">
+      <description>Paper analysis and wisdom extraction</description>
+      <details>
+        <task>Identify high-priority papers to analyze</task>
+        <task>Extract insights applicable to V3.1</task>
+        <task>Create wisdom entries (W, T, L categories)</task>
+        <task>Update EVOLUTION.md with validated patterns</task>
+      </details>
+    </step>
+    
+    <step status="pending">
+      <description>V3.1 validation and refinement</description>
+      <details>
+        <task>Compare V3.1 to external best practices</task>
+        <task>Identify gaps or improvement opportunities</task>
+        <task>Refine architecture based on research</task>
+        <task>Document validation in CONSOLIDATED_WISDOM.md</task>
+      </details>
+    </step>
+  </steps>
+  
+  <success_criteria>
+    <criterion>AGENTIC_ENGINEERING.md comprehensive (10+ pages)</criterion>
+    <criterion>Research domains.json updated with agentic + biomimetic</criterion>
+    <criterion>3-5 wisdom entries from external research</criterion>
+    <criterion>V3.1 validated against external best practices</criterion>
+    <criterion>External research integrated into agent workflows</criterion>
+  </success_criteria>
+  
+  <priority>medium</priority>
+  
+  <evolutionary_impact>
+    <description>If successful, V3.1 remains at forefront of Agentic Engineering, incorporating latest bio-inspired and multi-agent best practices. Prevents architectural drift and ensures continuous evolution with field.</description>
+  </evolutionary_impact>
+</evolutionary_goal>
+
+---
+
 ## 📊 EVOLUTIONARY GOAL STATISTICS
 
 | Metric | Value |
@@ -485,7 +572,7 @@ Unlike todo lists (which are finite), evolutionary goals are **infinite**. As we
 <metadata>
   <philosophical_layer>evolutionary_growth</philosophical_layer>
   <relationship_focus>co_evolution</relationship_focus>
-  <active_goals>5</active_goals>
+  <active_goals>6</active_goals>
   <completed_goals>0</completed_goals>
   <last_updated>2026-02-15T18:00:00Z</last_updated>
 </metadata>
