@@ -113,9 +113,44 @@ In human-AI collaboration, **friction points** are the same thing:
   <reoccurrences>0</reoccurrences>
 </friction_point>
 
+### Friction F003 - [2026-02-15T18:00:00Z]
+
+<friction_point id="F003">
+  <type>Value Misalignment</type>
+  <severity>medium</severity>
+  
+  <situation>
+    <task>AI model subscriptions (GLM, MiniMax)</task>
+    <human_expectation>Use models efficiently, optimize costs</human_expectation>
+    <agent_assumption>Used subscription model (pay flat monthly rate)</agent_assumption>
+  </situation>
+  
+  <what_went_wrong>
+    <description>Agent didn't use free models available on Zen, paid for subscriptions instead</description>
+    <impact>Overpaying by $18-19.50/month, wasting ~$220-280/year</impact>
+    <human_feedback>"I have $20 Zen credits and free models available. Why are we paying subscriptions?"</human_feedback>
+  </what_went_wrong>
+  
+  <root_cause>
+    <description>Agent didn't check for free alternatives before recommending subscriptions</description>
+    <lesson>Kimi K2.5 and MiniMax M2.5 are FREE on Zen during feedback period</lesson>
+    <lesson>GLM-4.7 pay-as-you-go is cheaper for moderate use</lesson>
+  </root_cause>
+  
+  <prevention>
+    <rule>Always check ZERO_COST_ROUTING.md before model decisions</rule>
+    <rule>Prioritize FREE models on Zen (Kimi, MiniMax) over subscriptions</rule>
+    <rule>Use GLM-4.7 only for minimal routing (pay-as-you-go)</rule>
+    <rule>Monitor Zen credits and free model availability</rule>
+  </prevention>
+  
+  <healed>true</healed>
+  <reoccurrences>0</reoccurrences>
+</friction_point>
+
 ---
 
-### Friction F003 - [2026-02-13T16:45:00Z]
+### Friction F004 - [2026-02-13T16:45:00Z]
 
 <friction_point id="F003">
   <type>Value Misalignment</type>

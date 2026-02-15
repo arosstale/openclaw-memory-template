@@ -3,6 +3,25 @@
 > **Purpose:** Optimization strategy for maximizing performance/cost using specialized models.
 > **Configuration:** Moonshot (Kimi) + Zen OpenCode + GLM (ZhipuAI)
 > **Philosophy:** Leverage massive context windows (Kimi) and strict coding ability (Zen) with a logic router (GLM).
+> **Cost Optimization:** Zero-Cost Strategy — see ZERO_COST_ROUTING.md
+
+---
+
+## 💰 Zero-Cost Eastern Dragon Configuration
+
+**Goal:** Preserve Zen OpenCode credits by leveraging currently FREE models
+**Monthly Target:** $0 recurring costs (vs. current $20/month)
+
+| Role | Model | Cost | Credit Impact |
+|------|-------|------|---------------|
+| **Manager (Router)** | GLM-4.7 | Minimal (pay-as-you-go) | Negligible |
+| **Librarian (Recall)** | Kimi K2.5 | FREE (feedback period) | $0 |
+| **Engineer (Code)** | MiniMax M2.5 | FREE (Zen tier) | $0 |
+
+**Total Monthly Cost:** $0
+**Annual Savings:** $216-234
+
+**Detailed Analysis:** ZERO_COST_ROUTING.md
 
 ---
 
@@ -12,6 +31,8 @@
 **Model:** `GLM-4` (or `GLM-4-Air` for speed)
 **Role:** Logic Routing, Triage, Tool Selection
 **Why:** Excellent function calling and JSON structuring.
+**Cost Optimization:** Pay-as-you-go (minimal token usage), cancel $10 subscription
+**See:** ZERO_COST_ROUTING.md for detailed cost analysis
 
 **Instructions:**
 - Receive user input.
@@ -22,6 +43,8 @@
 **Model:** `Moonshot Kimi (k2.5)`
 **Role:** Context Hoarding, Long-Term Memory Search
 **Why:** Lossless long-context recall (200k+ tokens).
+**Cost Optimization:** FREE on Zen (during feedback period), pay-as-you-go fallback
+**See:** ZERO_COST_ROUTING.md for detailed cost analysis
 
 **Instructions:**
 - "Read the entire `memory/projects/` folder."
@@ -29,9 +52,11 @@
 - "Summarize the architectural decisions for Project X."
 
 ### 3. The Engineer (Execution)
-**Model:** `Zen OpenCode` (or `DeepSeek Coder V2`)
+**Model:** `Zen OpenCode` (MiniMax M2.5)
 **Role:** Coding, Refactoring, Diff Generation
 **Why:** Fine-tuned for strict diff formats and code generation.
+**Cost Optimization:** FREE on Zen (during feedback period), pay-as-you-go fallback
+**See:** ZERO_COST_ROUTING.md for detailed cost analysis
 
 **Instructions:**
 - "Apply this diff to `src/main.py`."
