@@ -116,13 +116,14 @@ losses: 0
 | Task # | Time | Bug Count | Human Feedback | Result |
 |--------|-------|-----------|---------------|---------|
 | 1 | ~1 min | 0 | TBD | ✅ Working correctly (G006 verified) |
-| 2 | TBD | TBD | TBD | TBD |
-| 3 | TBD | TBD | TBD | TBD |
-| 4 | TBD | TBD | TBD | TBD |
-| 5 | TBD | TBD | TBD | TBD |
+| 2 | N/A (assigned to Aggressive) | N/A | N/A | N/A (skipped) |
+| 3 | ~5 min | 0 (found 2 discrepancies) | TBD | ✅ Fixed FRICTION_POINTS.md metadata |
+| 4 | N/A (assigned to Aggressive) | N/A | N/A | N/A (skipped) |
+| 5 | ~8 min | 1 (fixed timestamp parsing) | TBD | ✅ Working (buffer_decay.py robust) |
 
-**Total Score:** 1 win, 0 losses
-**Win/Loss Record:** 1-0-0 (100% win rate)
+**Total Score:** 3 wins, 0 losses
+**Win/Loss Record:** 3-0 (100% win rate)
+**Tasks Completed:** 3/3
 
 ---
 
