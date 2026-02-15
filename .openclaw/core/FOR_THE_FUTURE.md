@@ -134,17 +134,104 @@ The difference:
   <priority>medium</priority>
 </evolutionary_goal>
 
+<evolutionary_goal id="G003">
+  <title>Automated ID Validation System</title>
+  <state>active</state>
+  <target_date>2026-02-28T00:00:00Z</target_date>
+  <progress>0.10</progress>
+  
+  <origin>
+    <source>FRICTION_POINTS.md</source>
+    <friction_id>F004</friction_id>
+    <wisdom_id>T004</wisdom_id>
+    <root_cause>F004 had ID labeled as "F003" (duplicate ID) - manual ID tracking has error rate >0</root_cause>
+  </origin>
+  
+  <current_state>XML-based tracking systems (FRICTION_POINTS.md, CONSOLIDATED_WISDOM.md) rely on manual ID assignment. Duplicate IDs cause confusion in tracking and analysis. Triple-check caught F004, but this should be automated.</current_state>
+  
+  <evolutionary_target>
+    <description>By February 28, implement automated ID uniqueness validation system that:</description>
+    <checklist>
+      <item>Scans all XML files for duplicate IDs (wisdom, friction, goals)</item>
+      <item>Validates XML structure (unclosed tags, malformed XML)</item>
+      <item>Runs automatically before every commit (pre-commit hook)</item>
+      <item>Provides clear error messages: "Duplicate ID F003 found in FRICTION_POINTS.md (line 152)"</item>
+      <item>Integrates with ERROR.md logging for prevention tracking</item>
+    </checklist>
+  </evolutionary_target>
+  
+  <steps>
+    <step status="completed">
+      <description>Document wisdom T004 (ID uniqueness should be automated)</description>
+      <completed_at>2026-02-15T19:15:00Z</completed_at>
+    </step>
+    
+    <step status="in_progress">
+      <description>Create validate_xml.sh script</description>
+      <started_at>2026-02-15T19:20:00Z</started_at>
+      <details>
+        <task>Parse XML files with xmllint or grep</task>
+        <task>Extract all ID attributes (wisdom, friction_point, evolutionary_goal)</task>
+        <task>Check for duplicates within each file</task>
+        <task>Check for duplicates across all files (should be globally unique)</task>
+        <task>Return clear error messages with line numbers</task>
+      </details>
+    </step>
+    
+    <step status="pending">
+      <description>Add to .git/hooks/pre-commit</description>
+      <details>
+        <task>Make validate_xml.sh executable</task>
+        <task>Create symlink to .git/hooks/pre-commit</task>
+        <task>Test by creating duplicate ID and committing (should fail)</task>
+      </details>
+    </step>
+    
+    <step status="pending">
+      <description>Test with 5 commits</description>
+      <details>
+        <task>Commit valid change (should succeed)</task>
+        <task>Attempt duplicate ID (should fail with clear message)</task>
+        <task>Attempt unclosed XML tag (should fail with clear message)</task>
+        <task>Verify error messages are actionable</task>
+      </details>
+    </step>
+    
+    <step status="pending">
+      <description>Document usage in README.md</description>
+      <details>
+        <task>Add section: "Automated Validation"</task>
+        <task>Explain pre-commit hook behavior</task>
+        <task>Provide troubleshooting tips</task>
+      </details>
+    </step>
+  </steps>
+  
+  <success_criteria>
+    <criterion>0 duplicate ID friction points in 30 days</criterion>
+    <criterion>Validation runs automatically before every commit</criterion>
+    <criterion>Error messages are clear and actionable</criterion>
+    <criterion>Developer workflow not significantly slowed (validation <2 seconds)</criterion>
+  </success_criteria>
+  
+  <priority>high</priority>
+  
+  <evolutionary_impact>
+    <description>If successful, this prevents a class of errors that waste 2-5 hours of debugging time per occurrence. More importantly, it creates confidence in ID-based tracking systems, enabling more complex XML-based structures without fear of manual errors.</description>
+  </evolutionary_impact>
+</evolutionary_goal>
+
 ---
 
 ## 📊 EVOLUTIONARY GOAL STATISTICS
 
 | Metric | Value |
 |--------|--------|
-| **Active Goals** | 2 |
+| **Active Goals** | 3 |
 | **Completed Goals** | 0 |
-| **Avg Progress** | 28% |
-| **Avg Target Time** | 14 days |
-| **High Priority** | 1 |
+| **Avg Progress** | 22% |
+| **Avg Target Time** | 11 days |
+| **High Priority** | 2 |
 | **Medium Priority** | 1 |
 
 ---
@@ -237,7 +324,7 @@ Unlike todo lists (which are finite), evolutionary goals are **infinite**. As we
 <metadata>
   <philosophical_layer>evolutionary_growth</philosophical_layer>
   <relationship_focus>co_evolution</relationship_focus>
-  <active_goals>2</active_goals>
+  <active_goals>3</active_goals>
   <completed_goals>0</completed_goals>
-  <last_updated>[ISO-8601]</last_updated>
+  <last_updated>2026-02-15T19:30:00Z</last_updated>
 </metadata>

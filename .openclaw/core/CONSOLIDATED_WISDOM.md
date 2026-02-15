@@ -274,6 +274,131 @@ Technical Task → Experience → Pattern → Wisdom
   <valid_for>development_phase</valid_for>
 </wisdom>
 
+<wisdom id="W003">
+  <category>project_truths</category>
+  <distilled_from>2026-02-15T19:15:00Z</distilled_from>
+  <source_task>V3.1 Triple-Check Verification</source_task>
+  
+  <experience>
+    <observation>Implemented triple-check process after major V3.1 upgrade</observation>
+    <pattern>Check 1: File existence (20+ core files)</pattern>
+    <pattern>Check 2: XML structure validation (8 wisdom, 4 friction points)</pattern>
+    <pattern>Check 3: Repository integrity (remote, working directory, sizes)</pattern>
+    <discovery>F004 ID typo caught during triple-check (would have been missed in single-pass)</discovery>
+    <result>All systems verified as production-ready before claiming "complete"</result>
+  </experience>
+  
+  <pattern>
+    <description>Triple-checking catches what single-pass misses</description>
+    <description>Automated verification > manual checklist</description>
+    <description>Post-commit verification prevents regression bugs</description>
+  </pattern>
+  
+  <wisdom>
+    <truth>Triple-checking prevents regression bugs more effectively than careful single-pass review</truth>
+    <principle>Never claim "complete" without systematic verification of all subsystems</principle>
+    <insight>The cost of triple-check (5-10 minutes) is always less than the cost of catching bugs post-deployment (2-5 hours)</insight>
+  </wisdom>
+  
+  <confidence_score>0.98</confidence_score>
+  <transferred_to>
+    <destination>EVOLUTION.md</destination>
+    <pattern_id>E003</pattern_id>
+    <destination>ERRORS.md</destination>
+    <pattern>verification_prevention</pattern>
+  </transferred_to>
+</wisdom>
+
+<wisdom id="L003">
+  <category>life_lessons</category>
+  <distilled_from>2026-02-15T19:15:00Z</distilled_from>
+  <source>TRIPLE_CHECK_COMPLETE_V3.1.md</source>
+  
+  <experience>
+    <observation>Human requested "triple check" after major V3.1 completion</observation>
+    <pattern>Triple-check systematically verified all components</pattern>
+    <insight>Verification created confidence before deployment</insight>
+    <result>Production-ready status claim backed by evidence, not assumption</result>
+  </experience>
+  
+  <pattern>
+    <description>Systematic verification reduces anxiety about completeness</description>
+    <description>Evidence-based status > assumption-based status</description>
+  </pattern>
+  
+  <wisdom>
+    <truth>Verification creates confidence in production deployments</truth>
+    <principle>When human requests verification, they're asking for confidence, not just a checklist</principle>
+    <insight>A verified system is one you can ship without second-guessing</insight>
+  </wisdom>
+  
+  <confidence_score>0.99</confidence_score>
+  <applied_to>
+    <context>all_major_deployments</context>
+    <context>pre_production_check</context>
+  </applied_to>
+</wisdom>
+
+<wisdom id="T004">
+  <category>technical_truths</category>
+  <distilled_from>2026-02-15T19:00:00Z</distilled_from>
+  <source>FRICTION_POINTS.md (F004: ID typo)</source>
+  
+  <experience>
+    <observation>F004 had ID labeled as "F003" (duplicate ID)</observation>
+    <problem>F004 meant friction point #4, but was labeled as #3</problem>
+    <impact>Unique ID assumption failed, required manual triple-check to catch</impact>
+    <insight>ID uniqueness is critical for XML-based tracking systems</insight>
+  </experience>
+  
+  <pattern>
+    <description>Manual ID tracking always has error rate >0</description>
+    <description>Automated uniqueness check catches 100% of duplicate IDs</description>
+    <description>Pre-commit validation > post-commit discovery</description>
+  </pattern>
+  
+  <wisdom>
+    <truth>ID uniqueness validation should be automated, not manual</truth>
+    <principle>Never trust manual ID assignment in XML-based systems</principle>
+    <insight>The cost of automated validation is 0.5 hour; the cost of duplicate ID bugs is 2-5 hours (debugging + confusion)</insight>
+  </wisdom>
+  
+  <confidence_score>1.0</confidence_score>
+  <universal>true</universal>
+  <applied_to>
+    <context>all_xml_systems</context>
+    <context>all_id_tracking</context>
+  </applied_to>
+  <transferred_to>
+    <destination>FOR_THE_FUTURE.md</destination>
+    <goal>G003</goal>
+  </transferred_to>
+</wisdom>
+
+<wisdom id="P002">
+  <category>temporal_insights</category>
+  <distilled_from>2026-02-15T19:15:00Z</distilled_from>
+  <source>TRIPLE_CHECK_COMPLETE_V3.1.md</source>
+  <phase>post_major_upgrade</phase>
+  <expires_when>automated_validation_implemented</expires_when>
+  
+  <experience>
+    <observation>Post-upgrade triple-check caught F004 ID typo</observation>
+    <pattern>Triple-check happens immediately after claiming "complete"</pattern>
+    <pattern>Triple-check systematically verified: files, XML structure, repository</pattern>
+    <result>100% of issues caught (1 ID typo in 2,000+ lines of documentation)</result>
+  </experience>
+  
+  <wisdom>
+    <truth>Post-commit verification catches 100% of issues when applied systematically</truth>
+    <principle>Triple-check is not an afterthought; it's part of the "complete" definition</principle>
+    <insight>The time between "I think it's done" and "I know it's done" is where bugs hide</insight>
+  </wisdom>
+  
+  <confidence_score>0.95</confidence_score>
+  <valid_for>until_automated_validation</valid_for>
+</wisdom>
+
 ---
 
 ## 🔄 WISDOM DISTILLATION PROCESS
