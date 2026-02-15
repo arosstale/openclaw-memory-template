@@ -16,7 +16,7 @@
   
   <version>
     <openclaw>2026.2.13</openclaw>
-    <template>V3.0</template>
+    <template>V3.1</template>
     <last_updated>[ISO-8601 Timestamp]</last_updated>
   </version>
   
@@ -188,6 +188,16 @@
       <rule>Link related projects via semantic tags</rule>
       <rule>Pull ancestral knowledge from linked projects</rule>
     </mycelium>
+    
+    <co_processor>
+      <enabled>true</enabled>
+      <file>CONSOLIDATED_WISDOM.md</file>
+      <philosophy>Biomimetic Co-Processor that feels like mind extension</philosophy>
+      <rule>Distill technical tasks into wisdom (truths, lessons, principles)</rule>
+      <rule>Extract patterns from experiences (attempt → pattern → wisdom)</rule>
+      <rule>Transfer wisdom to relevant files (EVOLUTION.md, SHARED_VALUES.md)</rule>
+      <rule>Use wisdom as decision framework (not just past data)</rule>
+    </co_processor>
   </bio_inspired_memory>
   
   <learning_patterns>
