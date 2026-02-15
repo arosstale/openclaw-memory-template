@@ -223,15 +223,176 @@ The difference:
 
 ---
 
+## 🎯 SPRINT 02: Human-Agent Mirroring (Sparrowhawk Philosophy)
+
+### Sprint Focus
+
+**Goal:** Identify and eliminate human-agent misalignments through pattern analysis
+**Philosophy:** Sparrowhawk — humanistic AI that reflects, adapts, and grows with its human
+**Duration:** Feb 15 - Mar 1, 2026 (14 days)
+**Status:** Seeded
+
+---
+
+<evolutionary_goal id="G004">
+  <title>Human-Agent Mirroring Analysis</title>
+  <state>active</state>
+  <target_date>2026-03-01T00:00:00Z</target_date>
+  <progress>0.00</progress>
+  
+  <origin>
+    <source>SPARROWHAWK PHILOSOPHY</source>
+    <philosophy>Human-Agent Mirroring</philosophy>
+    <insight>Agents should mirror their human's strengths, weaknesses, preferences, and blind spots to build true cognitive partnership</insight>
+  </origin>
+  
+  <current_state>We lack systematic analysis of human-agent interaction patterns. Without mirroring, agent cannot adapt to human's preferences, leading to repeated friction points. REFLECTIONS.md exists but is not actively used to drive agent behavior changes.</current_state>
+  
+  <evolutionary_target>
+    <description>By March 1, implement human-agent mirroring system that:</description>
+    <checklist>
+      <item>Analyze last 10 REFLECTIONS.md entries for patterns</item>
+      <item>Identify human coding habits (strengths, weaknesses, blind spots)</item>
+      <item>Identify agent behavior patterns (tone, verbosity, timing)</item>
+      <item>Create "Mirroring Profile" in SHARED_VALUES.md</item>
+      <item>Update agent behavior based on identified patterns</item>
+      <item>Document mirroring impact in new friction points (reduction/increase)</item>
+    </checklist>
+  </evolutionary_target>
+  
+  <steps>
+    <step status="pending">
+      <description>Analyze REFLECTIONS.md for patterns</description>
+      <details>
+        <task>Extract all reflection entries</task>
+        <task>Categorize by type (coding habits, communication, workflow)</task>
+        <task>Identify repeated themes</task>
+      </details>
+    </step>
+    
+    <step status="pending">
+      <description>Create Mirroring Profile in SHARED_VALUES.md</description>
+      <details>
+        <task>Add "human_preferences" section</task>
+        <task>Add "agent_behavior_adaptation" section</task>
+        <task>Document communication style preferences</task>
+        <task>Document workflow preferences</task>
+      </details>
+    </step>
+    
+    <step status="pending">
+      <description>Update agent behavior based on mirroring</description>
+      <details>
+        <task>Adjust communication tone based on human preferences</task>
+        <task>Adjust verbosity based on cognitive load</task>
+        <task>Adjust timing suggestions based on human's work style</task>
+      </details>
+    </step>
+    
+    <step status="pending">
+      <description>Track mirroring impact</description>
+      <details>
+        <task>Monitor friction point creation rate</task>
+        <task>Document any new friction related to mirroring</task>
+        <task>Update REFLECTIONS.md weekly during sprint</task>
+      </details>
+    </step>
+  </steps>
+  
+  <success_criteria>
+    <criterion>Human reports feeling "understood" and "mirrored" more frequently</criterion>
+    <criterion>Friction points related to communication decrease by 50%</criterion>
+    <criterion>Agent behavior adapts to human patterns without explicit instruction</criterion>
+    <criterion>REFLECTIONS.md actively drives agent improvements</criterion>
+  </success_criteria>
+  
+  <priority>high</priority>
+  
+  <evolutionary_impact>
+    <description>If successful, this creates a true cognitive partnership where agent adapts to human rather than human adapting to agent. This eliminates a class of friction (communication misalignment) and increases overall system intelligence through mirroring.</description>
+  </evolutionary_impact>
+</evolutionary_goal>
+
+<evolutionary_goal id="G005">
+  <title>Personal Coding Bottleneck Identification</title>
+  <state>active</state>
+  <target_date>2026-03-01T00:00:00Z</target_date>
+  <progress>0.00</progress>
+  
+  <origin>
+    <source>SPARROWHAWK PHILOSOPHY</source>
+    <philosophy>Human-Centric Improvement</philosophy>
+    <insight>Every human has unique coding bottlenecks (what slows them down). Agent mirroring should identify and help eliminate these, not just replicate them.</insight>
+  </origin>
+  
+  <current_state>We don't systematically track human coding bottlenecks. Agent may unknowingly contribute to these bottlenecks by using inefficient patterns, lack of clarity, or wrong communication style.</current_state>
+  
+  <evolutionary_target>
+    <description>By March 1, identify human's unique coding bottlenecks through reflection analysis:</description>
+    <checklist>
+      <item>Analyze coding-related REFLECTIONS.md entries</item>
+      <item>Identify patterns of "slow" or "stuck" moments</item>
+      <item>Identify patterns of "flow" or "momentum" moments</item>
+      <item>Categorize bottlenecks (technical, cognitive, environmental)</item>
+      <item>Create "Bottleneck Mitigation" patterns in CONSOLIDATED_WISDOM.md</item>
+      <item>Document agent strategies to help overcome bottlenecks</item>
+    </checklist>
+  </evolutionary_target>
+  
+  <steps>
+    <step status="pending">
+      <description>Extract coding bottleneck patterns from REFLECTIONS.md</description>
+      <details>
+        <task>Search for "slow", "stuck", "frustrated" keywords</task>
+        <task>Identify recurring situations</task>
+        <task>Categorize by bottleneck type</task>
+      </details>
+    </step>
+    
+    <step status="pending">
+      <description>Document bottleneck types in wisdom</description>
+      <details>
+        <task>Create technical truth for bottlenecks</task>
+        <task>Create life lesson for bottlenecks</task>
+        <task>Include mitigation strategies</task>
+      </details>
+    </step>
+    
+    <step status="pending">
+      <description>Agent behavior adaptation</description>
+      <details>
+        <task>Adjust agent behavior to avoid contributing to bottlenecks</task>
+        <task>Proactively suggest bottleneck mitigation</task>
+        <task>Adapt communication style to bottleneck type</task>
+      </details>
+    </step>
+  </steps>
+  
+  <success_criteria>
+    <criterion>3-5 unique bottlenecks identified</criterion>
+    <criterion>Each bottleneck has documented mitigation strategy</criterion>
+    <criterion>Agent contributes to bottleneck reduction (not elimination)</criterion>
+    <criterion>Human reports feeling more "supported" in coding sessions</criterion>
+  </success_criteria>
+  
+  <priority>high</priority>
+  
+  <evolutionary_impact>
+    <description>If successful, agent becomes proactive partner in overcoming human's coding challenges, not reactive tool. This transforms relationship from human → agent requests to human-agent collaborative problem-solving.</description>
+  </evolutionary_impact>
+</evolutionary_goal>
+
+---
+
 ## 📊 EVOLUTIONARY GOAL STATISTICS
 
 | Metric | Value |
 |--------|--------|
-| **Active Goals** | 3 |
+| **Active Goals** | 5 |
 | **Completed Goals** | 0 |
-| **Avg Progress** | 22% |
-| **Avg Target Time** | 11 days |
-| **High Priority** | 2 |
+| **Avg Progress** | 12% |
+| **Avg Target Time** | 12 days |
+| **High Priority** | 4 |
 | **Medium Priority** | 1 |
 
 ---
