@@ -22,6 +22,55 @@ if [[ ! -f "$MEMORY_FILE" ]]; then
     exit 1
 fi
 
+# Validate XML structure before compression
+echo "🔍 Validating XML structure..."
+echo ""
+
+# Function to check for unclosed XML tags
+validate_xml() {
+    local file=$1
+    local errors=0
+
+    # Check for unclosed opening tags (simplified regex)
+    local unclosed=$(grep -E '<[a-z_]+[^>]*>$' "$file" | grep -vE '</[a-z_]+>$')
+    
+    # Count opening vs closing tags (simplified)
+    local open_tags=$(grep -oE '<[a-z_]+[^>/]*>' "$file" | wc -l)
+    local close_tags=$(grep -oE '</[a-z_]+>' "$file" | wc -l)
+    
+    if [[ $open_tags -ne $close_tags ]]; then
+        echo "❌ XML Validation Failed:"
+        echo "   Opening tags: $open_tags"
+        echo "   Closing tags: $close_tags"
+        echo "   Mismatch detected!"
+        return 1
+    fi
+    
+    # Check for common issues
+    if grep -E '<[a-z_]+[^>]*$' "$file" | grep -vE '</[a-z_]+>$' > /dev/null 2>&1; then
+        echo "⚠️  Warning: Potential unclosed tags found at line ends"
+        echo "   Run: grep -n '<[a-z_]+[^>]*$' $file"
+        errors=$((errors + 1))
+    fi
+    
+    if [[ $errors -eq 0 ]]; then
+        echo "✅ XML Structure Valid"
+        return 0
+    else
+        echo "⚠️  XML Warnings: $errors"
+        return 0  # Don't fail on warnings, just warn
+    fi
+}
+
+# Validate current file
+if ! validate_xml "$MEMORY_FILE"; then
+    echo ""
+    echo "❌ Cannot proceed with compression: XML validation failed"
+    echo "   Please fix XML structure in MEMORY.md first"
+    exit 1
+fi
+echo ""
+
 # Count lines
 LINE_COUNT=$(wc -l < "$MEMORY_FILE")
 echo "📊 Current Line Count: $LINE_COUNT"
